@@ -47,7 +47,7 @@ namespace GAS.Runtime
 #if UNITY_EDITOR
         public override void OnEditorPreview(GameObject previewObject)
         {
-            // 使用Debug 绘制box预览
+            // Use Debug to draw the box preview
             float showTime = 1;
             Color color = Color.green;
             var relativeTransform = previewObject.transform;

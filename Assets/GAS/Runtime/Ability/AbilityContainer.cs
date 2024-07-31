@@ -51,12 +51,12 @@ namespace GAS.Runtime
         {
             if (!_abilities.ContainsKey(abilityName))
             {
-                // 开发指南:
-                // 如果你的Preset里配置了固有技能却没该技能(甚至_abilities里一个技能都没有)
-                // 可能是你忘记调用ASC::Init(), 请检查AbilitySystemComponent的初始化
-                // 通常我们使用ASC::InitWithPreset()来间接调用ASC::Init()执行初始化
+                // Development Guide:
+                // If your Preset has an inherent skill configured but there is no such skill (even no skill in _abilities)
+                // Maybe you forgot to call ASC::Init(), please check the initialization of AbilitySystemComponent
+                // Usually we use ASC::InitWithPreset() to indirectly call ASC::Init() to perform initialization
 #if UNITY_EDITOR
-                // 这个输出可以删掉, 某些情况下确实会尝试激活不存在的技能(失败了也无所谓), 但是对开发期间的调试有帮助
+                // This output can be deleted. In some cases, it will try to activate a non-existent skill (it doesn't matter if it fails), but it is helpful for debugging during development
                 Debug.LogWarning(
                     $"you are trying to activate an ability that does not exist: " +
                     $"abilityName=\"{abilityName}\", GameObject=\"{_owner.name}\", " +

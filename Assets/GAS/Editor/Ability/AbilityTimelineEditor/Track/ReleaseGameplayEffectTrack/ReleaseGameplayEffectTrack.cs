@@ -61,7 +61,7 @@ namespace GAS.Editor
 
         protected override void OnAddTrackItem(DropdownMenuAction action)
         {
-            // 添加Mark数据
+            // Add Mark Data
             var markEvent = new ReleaseGameplayEffectMarkEvent
             {
                 startFrame = GetTrackIndexByMouse(action.eventInfo.localMousePosition.x),
@@ -69,7 +69,7 @@ namespace GAS.Editor
             };
             ReleaseGameplayEffectTrackData.markEvents.Add(markEvent);
 
-            // 刷新显示
+            // Refresh Display
             var mark = new ReleaseGameplayEffectMark();
             mark.InitTrackMark(this, Track, _frameWidth, markEvent);
             _trackItems.Add(mark);
@@ -81,10 +81,10 @@ namespace GAS.Editor
 
         protected override void OnRemoveTrack(DropdownMenuAction action)
         {
-            // 删除数据
+            // delete data
             AbilityAsset.ReleaseGameplayEffect.Remove(_releaseGameplayEffectTrackData);
             AbilityTimelineEditorWindow.Instance.Save();
-            // 删除显示
+            // Delete Display
             TrackParent.Remove(TrackRoot);
             MenuParent.Remove(MenuRoot);
             Debug.Log("[EX] Remove Release GameplayEffect Track");

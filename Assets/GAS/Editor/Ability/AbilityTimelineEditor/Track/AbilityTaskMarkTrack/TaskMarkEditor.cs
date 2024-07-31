@@ -1,20 +1,20 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using GAS.General;
-using GAS.Runtime;
-using Sirenix.OdinInspector;
-using Sirenix.OdinInspector.Editor;
-using UnityEditor;
-using UnityEngine;
-
+﻿#if UNITY_EDITOR
 namespace GAS.Editor
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using Editor;
+    using GAS.General;
+    using Runtime;
+    using Sirenix.OdinInspector;
+    using Sirenix.OdinInspector.Editor;
+    using UnityEditor;
+    using UnityEngine;
+    
     public class TaskMarkEditor : OdinEditorWindow
     {
-        [BoxGroup]
-        [HideLabel]
-        [DisplayAsString(TextAlignment.Left, true)]
+        [BoxGroup] [HideLabel] [DisplayAsString(TextAlignment.Left, true)]
         public string RunInfo;
 
         private TaskMark _mark;
@@ -22,13 +22,13 @@ namespace GAS.Editor
         [Delayed]
         [BoxGroup]
         [HideReferenceObjectPicker]
-        [ListDrawerSettings(ShowFoldout = true, DraggableItems = true)]
+        [ListDrawerSettings(Expanded = true, DraggableItems = true)]
         [OnValueChanged("OnTaskListChanged", true)]
         public List<InstantTaskCellInspector> Tasks;
 
         public static TaskMarkEditor Create(TaskMark mark)
         {
-            var window = CreateInstance<TaskMarkEditor>();
+            var window = new TaskMarkEditor();
             window._mark = mark;
 
             window.UpdateMarkInfo();
@@ -92,11 +92,8 @@ namespace GAS.Editor
         [InfoBox("This Task has no inspector!", InfoMessageType.Warning, "InstantTaskIsNull")]
         [OnValueChanged("OnTaskTypeChanged")]
         public string InstantTaskType;
-
-        [BoxGroup]
-        [HideReferenceObjectPicker]
-        [HideIf("InstantTaskIsNull")]
-        [LabelText("Detail")]
+        
+        [BoxGroup] [HideReferenceObjectPicker] [HideIf("InstantTaskIsNull")] [LabelText("Detail")]
         public InstantTaskInspector InstantTask;
 
         public InstantTaskCellInspector(InstantTaskData data)
@@ -126,11 +123,8 @@ namespace GAS.Editor
                 _instantTaskInspectorMap = new Dictionary<Type, Type>();
                 foreach (var inspectorType in InstantTaskInspectorTypes)
                 {
-                    if (inspectorType.BaseType != null)
-                    {
-                        var taskType = inspectorType.BaseType.GetGenericArguments()[0];
-                        _instantTaskInspectorMap.Add(taskType, inspectorType);
-                    }
+                    var taskType = inspectorType.BaseType.GetGenericArguments()[0];
+                    _instantTaskInspectorMap.Add(taskType, inspectorType);
                 }
 
                 return _instantTaskInspectorMap;
@@ -160,7 +154,7 @@ namespace GAS.Editor
         public void RefreshDetailInspector()
         {
             _instantAbilityTask = _data.Load() as InstantAbilityTask;
-            if (_instantAbilityTask != null && InstantTaskInspectorMap.TryGetValue(_instantAbilityTask.GetType(), out var inspectorType))
+            if (InstantTaskInspectorMap.TryGetValue(_instantAbilityTask.GetType(), out var inspectorType))
             {
                 var taskInspector = (InstantTaskInspector)Activator.CreateInstance(inspectorType);
                 taskInspector.Init(_instantAbilityTask);
@@ -173,3 +167,4 @@ namespace GAS.Editor
         }
     }
 }
+#endif

@@ -56,10 +56,10 @@ namespace GAS.Editor
 
         private void OnDurationFrameChanged()
         {
-            // 钳制
+            // Clamp
             var max = AbilityAsset.FrameCount - _clip.BuffGameplayEffectClipData.startFrame;
             var newValue = Mathf.Clamp(Duration, 1, max);
-            // 保存数据
+            // save data
             _clip.UpdateClipDataDurationFrame(newValue);
 
             _clip.RefreshShow(_clip.FrameUnitWidth);

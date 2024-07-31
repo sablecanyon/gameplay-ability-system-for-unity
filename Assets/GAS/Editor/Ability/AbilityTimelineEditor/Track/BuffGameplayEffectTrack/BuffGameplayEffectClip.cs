@@ -34,12 +34,12 @@ namespace GAS.Editor
         public override void RefreshShow(float newFrameUnitWidth)
         {
             base.RefreshShow(newFrameUnitWidth);
-            // clip 文本
+            // clip text
             ItemLabel.text = BuffGameplayEffectClipData.gameplayEffect
                 ? BuffGameplayEffectClipData.gameplayEffect.name
                 : "【NULL】";
 
-            // 刷新面板显示
+            // Refresh panel display
             if (AbilityTimelineEditorWindow.Instance.CurrentInspectorObject == this)
                 AbilityTimelineEditorWindow.Instance.SetInspector(this);
         }

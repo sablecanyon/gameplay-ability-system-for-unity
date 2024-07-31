@@ -19,14 +19,14 @@ namespace GAS.Runtime
 #if UNITY_EDITOR
         [TabGroup("Base/H1/V2", "General", SdfIconType.AwardFill, TextColor = "#FF7F00", Order = 2)]
         [TabGroup("Base/H1/V2", "Detail", SdfIconType.TicketDetailedFill, TextColor = "#BC2FDE")]
-        [LabelText("类型名称", SdfIconType.FileCodeFill)]
+        [LabelText("Type Name", SdfIconType.FileCodeFill)]
         [LabelWidth(WIDTH_LABEL)]
         [ShowInInspector]
         [PropertyOrder(-1)]
         public string TypeName => GetType().Name;
 
         [TabGroup("Base/H1/V2", "Detail")]
-        [LabelText("类型全名", SdfIconType.FileCodeFill)]
+        [LabelText("Type Full Name", SdfIconType.FileCodeFill)]
         [LabelWidth(WIDTH_LABEL)]
         [ShowInInspector]
         [PropertyOrder(-1)]
@@ -35,7 +35,7 @@ namespace GAS.Runtime
         [TabGroup("Base/H1/V2", "Detail")]
         [ListDrawerSettings(ShowFoldout = true, ShowItemCount = false, ShowPaging = false)]
         [ShowInInspector]
-        [LabelText("继承关系")]
+        [LabelText("Inheritance")]
         [LabelWidth(WIDTH_LABEL)]
         [PropertyOrder(-1)]
         public string[] InheritanceChain => GetType().GetInheritanceChain().Reverse().ToArray();

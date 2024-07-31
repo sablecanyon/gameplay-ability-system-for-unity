@@ -12,11 +12,11 @@ namespace GAS.Editor
     {
         public static bool IsValidClassName(string input)
         {
-            // 使用正则表达式匹配规则
-            // 类名必须以字母、下划线或@开头，并且后续可以是字母、下划线、@或数字
+            // Use regular expression matching rules
+            // Class names must start with a letter, underscore, or @, and can be followed by letters, underscores, @, or numbers
             var pattern = @"^[a-zA-Z_@][a-zA-Z_@0-9]*$";
 
-            // 使用 Regex.IsMatch 方法进行匹配
+            // Use the Regex.IsMatch method to match
             return Regex.IsMatch(input, pattern);
         }
         

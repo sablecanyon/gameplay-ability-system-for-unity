@@ -6,80 +6,80 @@ using UnityEngine;
 namespace GAS.Runtime
 {
     /// <summary>
-    /// 授予能力的激活策略
+    /// Activation Policy for granting abilities
     /// </summary>
     public enum GrantedAbilityActivationPolicy
     {
         /// <summary>
-        /// 不激活, 等待用户调用ASC激活
+        /// Not activated, waiting for the user to call ASC to activate
         /// </summary>
-        [LabelText("None - 不激活, 等待用户调用ASC激活", SdfIconType.Joystick)]
+        [LabelText("None - Not activated, waiting for the user to call ASC to activate", SdfIconType.Joystick)]
         None,
 
         /// <summary>
-        /// 能力添加时激活（GE添加时激活）
+        /// Activated when ability is added (Activated when GE is added)
         /// </summary>
-        [LabelText("WhenAdded - 能力添加时激活（GE添加时激活）", SdfIconType.LightningChargeFill)]
+        [LabelText("WhenAdded - Activated when the ability is added (activates when GE is added) ", SdfIconType.LightningChargeFill)]
         WhenAdded,
 
         /// <summary>
-        /// 同步GE激活时激活
+        /// Activated when Synchronous GE is activated
         /// </summary>
-        [LabelText("SyncWithEffect - 同步GE激活时激活", SdfIconType.Robot)]
+        [LabelText("SyncWithEffect - Activates when sync GE is activated", SdfIconType.Robot)]
         SyncWithEffect,
     }
 
     /// <summary>
-    /// 授予能力的取消激活策略
+    /// Deactivation policy for granted abilities
     /// </summary>
     public enum GrantedAbilityDeactivationPolicy
     {
         /// <summary>
-        /// 无相关取消激活逻辑, 需要用户调用ASC取消激活
+        /// There is no relevant deactivation logic, and the user needs to call ASC to deactivate
         /// </summary>
-        [LabelText("None - 无相关取消激活逻辑, 需要用户调用ASC取消激活", SdfIconType.Joystick)]
+        [LabelText("None - No deactivation logic, user needs to call ASC to deactivate", SdfIconType.Joystick)]
         None,
 
         /// <summary>
-        /// 同步GE，GE失活时取消激活
+        /// Synchronize GE, deactivate when GE is inactive
         /// </summary>
-        [LabelText("SyncWithEffect - 同步GE，GE失活时取消激活", SdfIconType.Robot)]
+        [LabelText("SyncWithEffect - Syncs with GE and deactivates when GE is deactivated", SdfIconType.Robot)]
         SyncWithEffect,
     }
 
     /// <summary>
-    /// 授予能力的移除策略
+    /// Removal policy for granted abilities
     /// </summary>
     public enum GrantedAbilityRemovePolicy
     {
         /// <summary>
-        /// 不移除
+        /// Do not remove
         /// </summary>
-        [LabelText("None - 不移除", SdfIconType.Joystick)]
+        [LabelText("None - Do not remove", SdfIconType.Joystick)]
         None,
 
         /// <summary>
-        /// 同步GE，GE移除时移除
+        /// Synchronize GE, remove when GE is removed
         /// </summary>
-        [LabelText("SyncWithEffect - 同步GE，GE移除时移除", SdfIconType.Robot)]
+        [LabelText("SyncWithEffect - Sync with GE, remove when GE is removed", SdfIconType.Robot)]
         SyncWithEffect,
 
         /// <summary>
-        /// 能力结束时自己移除
+        /// Removes itself when the ability ends
         /// </summary>
-        [LabelText("WhenEnd - 能力结束时自己移除", SdfIconType.LightningChargeFill)]
+        [LabelText("WhenEnd - Removes itself when the ability ends", SdfIconType.LightningChargeFill)]
         WhenEnd,
 
         /// <summary>
-        /// 能力取消时自己移除
+        /// Removes itself when ability is cancelled.
         /// </summary>
-        [LabelText("WhenCancel - 能力取消时自己移除", SdfIconType.LightningChargeFill)]
+        [LabelText("WhenCancel - Removes itself when the ability is canceled", SdfIconType.LightningChargeFill)]
         WhenCancel,
 
         /// <summary>
-        /// 能力结束或取消时自己移除
+        /// Removes itself when the ability ends or is cancelled.
         /// </summary>
-        [LabelText("WhenCancelOrEnd - 能力结束或取消时自己移除", SdfIconType.LightningChargeFill)]
+        [LabelText("WhenCancelOrEnd - removes itself when the ability ends or is canceled", SdfIconType.LightningChargeFill)]
         WhenCancelOrEnd,
     }
 
@@ -181,7 +181,7 @@ namespace GAS.Runtime
             Owner.GrantAbility(GrantedAbility.Ability);
             AbilitySpec.SetLevel(AbilityLevel);
 
-            // 是否添加时激活
+            // Whether to activate when adding
             if (ActivationPolicy == GrantedAbilityActivationPolicy.WhenAdded)
             {
                 Owner.TryActivateAbility(AbilityName);

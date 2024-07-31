@@ -22,8 +22,8 @@ namespace GAS.General.Validation
     public static class Validations
     {
         // https://learn.microsoft.com/zh-cn/dotnet/csharp/fundamentals/coding-style/identifier-names
-        // 可以在标识符上使用 @ 前缀来声明与 C# 关键字匹配的标识符。 @ 不是标识符名称的一部分。 例如，@if 声明名为 if 的标识符。
-        // 因此类似 @123abc 这样的标识符是不合法的。因为抛开@之后, 它实际上是以数字开头。
+        // You can use the @ prefix on an identifier to declare an identifier that matches a C# keyword. The @ is not part of the identifier name. For example, @if declares an identifier named if.
+        // Therefore, an identifier like @123abc is illegal because after leaving out the @, it actually starts with a number.
         private const string VariableNamePattern = @"^@?[a-zA-Z_][a-zA-Z0-9_]*$";
         public static readonly Regex VariableNameRegex = new Regex(VariableNamePattern);
 

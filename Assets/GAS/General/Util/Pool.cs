@@ -5,7 +5,7 @@ using System.Threading;
 namespace GAS.General
 {
     /// <summary>
-    /// 线程安全的无锁对象池
+    /// Thread-safe lock-free object pool
     /// </summary>
     public class Pool
     {

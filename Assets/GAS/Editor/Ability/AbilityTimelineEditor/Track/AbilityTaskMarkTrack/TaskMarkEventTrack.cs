@@ -62,14 +62,14 @@ namespace GAS.Editor
 
         protected override void OnAddTrackItem(DropdownMenuAction action)
         {
-            // 添加Mark数据
+            // Add Mark Data
             var markEvent = new TaskMarkEvent
             {
                 startFrame = GetTrackIndexByMouse(action.eventInfo.localMousePosition.x)
             };
             InstantTaskEventTrackData.markEvents.Add(markEvent);
 
-            // 刷新显示
+            // Refresh Display
             var mark = new TaskMark();
             mark.InitTrackMark(this, Track, _frameWidth, markEvent);
             _trackItems.Add(mark);
@@ -81,10 +81,10 @@ namespace GAS.Editor
 
         protected override void OnRemoveTrack(DropdownMenuAction action)
         {
-            // 删除数据
+            // delete data
             AbilityAsset.InstantTasks.Remove(_instantTasksTrackData);
             AbilityTimelineEditorWindow.Instance.Save();
-            // 删除显示
+            // Delete Display
             TrackParent.Remove(TrackRoot);
             MenuParent.Remove(MenuRoot);
             Debug.Log("[EX] Remove Instant Task Track");
