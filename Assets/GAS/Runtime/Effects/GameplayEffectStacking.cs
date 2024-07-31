@@ -7,54 +7,54 @@ namespace GAS.Runtime
 {
     public enum StackingType
     {
-        [LabelText("Independent", SdfIconType.XCircleFill)]
-        None, //It will not be superimposed. If it is released multiple times, each Effect is equivalent to a single Effect.
+        [LabelText("独立", SdfIconType.XCircleFill)]
+        None, //不会叠加，如果多次释放则每个Effect相当于单个Effect
 
-        [LabelText("Source", SdfIconType.Magic)]
-        AggregateBySource, //Each Source ASC on the Target has a separate stack instance, and each Source can apply X GameplayEffects in the stack.
+        [LabelText("来源", SdfIconType.Magic)]
+        AggregateBySource, //目标(Target)上的每个源(Source)ASC都有一个单独的堆栈实例, 每个源(Source)可以应用堆栈中的X个GameplayEffect.
 
-        [LabelText("Target", SdfIconType.Person)]
-        AggregateByTarget //There is only one stack instance on the target regardless of the source, and each source can apply the stack within the shared stack limit.
+        [LabelText("目标", SdfIconType.Person)]
+        AggregateByTarget //目标(Target)上只有一个堆栈实例而不管源(Source)如何, 每个源(Source)都可以在共享堆栈限制(Shared Stack Limit)内应用堆栈.
     }
 
     public enum DurationRefreshPolicy
     {
-        [LabelText("NeverRefresh - Do not refresh the duration of the Effect", SdfIconType.XCircleFill)]
-        NeverRefresh, //Do not refresh the duration of the Effect
+        [LabelText("NeverRefresh - 不刷新Effect的持续时间", SdfIconType.XCircleFill)]
+        NeverRefresh, //不刷新Effect的持续时间
 
         [LabelText(
-            "RefreshOnSuccessfulApplication - refresh duration after each successful apply",
+            "RefreshOnSuccessfulApplication - 每次apply成功后刷新持续时间",
             SdfIconType.HourglassTop)]
-        RefreshOnSuccessfulApplication //After each successful apply, the duration of the Effect is refreshed. If denyOverflowApplication is True, the redundant Apply will not refresh the Duration.
+        RefreshOnSuccessfulApplication //每次apply成功后刷新Effect的持续时间, denyOverflowApplication如果为True则多余的Apply不会刷新Duration
     }
 
     public enum PeriodResetPolicy
     {
-        [LabelText("NeverReset - Do not reset the Effect's cycle timer", SdfIconType.XCircleFill)]
-        NeverRefresh, //Do not reset the Effect's cycle timer
+        [LabelText("NeverReset - 不重置Effect的周期计时", SdfIconType.XCircleFill)]
+        NeverRefresh, //不重置Effect的周期计时
 
-        [LabelText("ResetOnSuccessfulApplication - resets the Effect's cycle timer after each successful apply", SdfIconType.HourglassTop)]
-        ResetOnSuccessfulApplication //Reset the Effect cycle timer after each successful apply
+        [LabelText("ResetOnSuccessfulApplication - 每次apply成功后重置Effect的周期计时", SdfIconType.HourglassTop)]
+        ResetOnSuccessfulApplication //每次apply成功后重置Effect的周期计时
     }
 
     public enum ExpirationPolicy
     {
-        [LabelText("ClearEntireStack - When the duration ends, clear all stacks", SdfIconType.TrashFill)]
-        ClearEntireStack, //When the duration ends, all stacks are cleared
+        [LabelText("ClearEntireStack - 持续时间结束时, 清除所有层数", SdfIconType.TrashFill)]
+        ClearEntireStack, //持续时间结束时,清除所有层数
 
-        [LabelText("RemoveSingleStackAndRefreshDuration - Removes one stack when the duration ends, then starts over again for the duration", SdfIconType.EraserFill)]
-        RemoveSingleStackAndRefreshDuration, //At the end of the duration, one stack is reduced, and then a new Duration is continued until the number of layers is reduced to 0.
+        [LabelText("RemoveSingleStackAndRefreshDuration - 持续时间结束时减少一层，然后重新经历一个Duration", SdfIconType.EraserFill)]
+        RemoveSingleStackAndRefreshDuration, //持续时间结束时减少一层，然后重新经历一个Duration，一直持续到层数减为0
 
-        [LabelText("RefreshDuration - When the duration ends, refresh the Duration again", SdfIconType.HourglassTop)]
-        RefreshDuration //When the duration ends, refresh the Duration again, which is equivalent to infinite Duration.
-        //TODO :You can handle the number of layers by calling OnStackCountChange(GameplayEffect ActiveEffect, int OldStackCount, int NewStackCount) of GameplayEffectsContainer.
-        //TODO :This can achieve complex effects such as reducing two layers and refreshing Duration at the end of Duration.
+        [LabelText("RefreshDuration - 持续时间结束时,再次刷新Duration", SdfIconType.HourglassTop)]
+        RefreshDuration //持续时间结束时,再次刷新Duration，这相当于无限Duration，
+        //TODO :可以通过调用GameplayEffectsContainer的OnStackCountChange(GameplayEffect ActiveEffect, int OldStackCount, int NewStackCount)来处理层数，
+        //TODO :可以达到Duration结束时减少两层并刷新Duration这样复杂的效果。
     }
 
-    // GE stack data structure
+    // GE堆栈数据结构
     public struct GameplayEffectStacking
     {
-        public string stackingCodeName; // In fact, it is not allowed to use it, but the hash value of stackingCodeName, that is, stackingHashCode
+        public string stackingCodeName; // 实际允许不会使用，而是使用stackingCodeName的hash值, 即stackingHashCode
         public int stackingHashCode;
         public StackingType stackingType;
         public int limitCount;
@@ -62,15 +62,15 @@ namespace GAS.Runtime
         public PeriodResetPolicy periodResetPolicy;
         public ExpirationPolicy expirationPolicy;
 
-        // Overflow logic processing
-        public bool denyOverflowApplication; //Corresponding to StackDurationRefreshPolicy, if it is True, the redundant Apply will not refresh the Duration
-        public bool clearStackOnOverflow; //This is only effective when DenyOverflowApplication is True. When Overflow occurs, all layers are deleted directly.
-        public GameplayEffect[] overflowEffects; // When more than the StackLimitCount number of Effects are applied, the OverflowEffects will be called.
+        // Overflow 溢出逻辑处理
+        public bool denyOverflowApplication; //对应于StackDurationRefreshPolicy，如果为True则多余的Apply不会刷新Duration
+        public bool clearStackOnOverflow; //当DenyOverflowApplication为True是才有效，当Overflow时是否直接删除所有层数
+        public GameplayEffect[] overflowEffects; // 超过StackLimitCount数量的Effect被Apply时将会调用该OverflowEffects
 
         public void SetStackingCodeName(string stackingCodeName)
         {
             this.stackingCodeName = stackingCodeName;
-            this.stackingHashCode = stackingCodeName?.GetHashCode() ?? 0; // Compatible with old SO data
+            this.stackingHashCode = stackingCodeName?.GetHashCode() ?? 0; // 兼容旧的SO数据
         }
 
         public void SetStackingHashCode(int stackingHashCode)
@@ -162,14 +162,14 @@ namespace GAS.Runtime
         [HideIf("IsNoStacking")]
         [InlineButton(@"@limitCount = int.MaxValue", SdfIconType.Hammer, "max")]
         [InlineButton(@"@limitCount = 0", SdfIconType.Hammer, "min")]
-        [ValidateInput("@limitCount >= 0", "must>=0")]
+        [ValidateInput("@limitCount >= 0", "必须>=0")]
         public int limitCount;
 
         [LabelWidth(LABEL_WIDTH)]
         [VerticalGroup]
         [LabelText(GASTextDefine.LABEL_GE_STACKING_DURATION_REFRESH_POLICY)]
         [HideIf("IsNoStacking")]
-        [InfoBox(GASTextDefine.LABEL_GE_STACKING_DENY_OVERFLOW_APPLICATION+"When True, redundant Apply will not refresh Duration", InfoMessageType.None,
+        [InfoBox(GASTextDefine.LABEL_GE_STACKING_DENY_OVERFLOW_APPLICATION+"为True时多余的Apply不会刷新Duration", InfoMessageType.None,
             VisibleIf =
                 "@durationRefreshPolicy == DurationRefreshPolicy.RefreshOnSuccessfulApplication && denyOverflowApplication")]
         public DurationRefreshPolicy durationRefreshPolicy;
@@ -186,7 +186,7 @@ namespace GAS.Runtime
         [HideIf("IsNoStacking")]
         public ExpirationPolicy expirationPolicy;
 
-        // Overflow logic processing
+        // Overflow 溢出逻辑处理
         [LabelWidth(LABEL_WIDTH)]
         [VerticalGroup]
         [LabelText(GASTextDefine.LABEL_GE_STACKING_DENY_OVERFLOW_APPLICATION)]
@@ -206,7 +206,7 @@ namespace GAS.Runtime
         public GameplayEffectAsset[] overflowEffects;
 
         /// <summary>
-        /// Convert to runtime data
+        /// 转换为运行时数据
         /// </summary>
         /// <returns></returns>
         public GameplayEffectStacking ToRuntimeData()

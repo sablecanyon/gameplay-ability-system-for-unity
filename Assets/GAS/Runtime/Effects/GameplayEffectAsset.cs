@@ -27,7 +27,7 @@ namespace GAS.Runtime
         private const string ERROR_NONE_CUE = "Cue CAN NOT be NONE!";
         private const string ERROR_DURATION = "Duration must be > 0.";
         private const string ERROR_PERIOD_GE_NONE = "Period GameplayEffect CAN NOT be NONE!";
-        private const string ERROR_GRANTED_ABILITY_INVALID = "There is an invalid Ability!";
+        private const string ERROR_GRANTED_ABILITY_INVALID = "存在无效的Ability!";
 
         #region Base Info
 
@@ -72,12 +72,15 @@ namespace GAS.Runtime
         [LabelText(GASTextDefine.LABLE_GE_INTERVAL, SdfIconType.AlarmFill)]
         [LabelWidth(WIDTH_LABEL)]
         [ShowIf("@DurationPolicy == EffectsDurationPolicy.Duration")]
+        [InfoBox("Period < 0.01会出现误差", InfoMessageType.Warning,
+            VisibleIf =
+                "@DurationPolicy == EffectsDurationPolicy.Duration && PeriodForDurational > 0 && PeriodForDurational < 0.01f")]
         [EnableIf("IsDurationalPolicy")]
         [Unit(Units.Second)]
         [PropertyOrder(3)]
         [PropertyRange(0, "@Duration")]
         [ShowInInspector]
-        // This Property is used to draw a range slider for the "limited time" effect
+        // 这个Property是为了给"限时型"效果绘制一个范围滑动条
         public float PeriodForDurational
         {
             get => Period;
@@ -90,7 +93,7 @@ namespace GAS.Runtime
         [EnableIf("IsPeriodic")]
         [AssetSelector]
         [InfoBox(ERROR_PERIOD_GE_NONE, InfoMessageType.Error, VisibleIf = "IsPeriodGameplayEffectNone")]
-        [InfoBox("Must be of type Instant", InfoMessageType.Error,
+        [InfoBox("必须为Instant类型", InfoMessageType.Error,
             VisibleIf =
                 "@IsPeriodic() && (PeriodExecution != null && PeriodExecution.DurationPolicy != EffectsDurationPolicy.Instant)")]
         [PropertyOrder(4)]
@@ -105,13 +108,13 @@ namespace GAS.Runtime
         [TabGroup(GRP_DATA_STACK, "Stacking", SdfIconType.Stack, TextColor = "#9B4AE3", Order = 1)]
         [HideLabel]
         [EnableIf("IsDurationalPolicy")]
-        [InfoBox("Instant effects cannot be stacked", InfoMessageType.None, VisibleIf = "@IsInstantPolicy()")]
+        [InfoBox("瞬时效果无法叠加", InfoMessageType.None, VisibleIf = "@IsInstantPolicy()")]
         public GameplayEffectStackingConfig Stacking;
 
 #if UNITY_EDITOR
         [TabGroup(GRP_DATA_STACK, "Stacking")]
         [ShowIf("@IsDurationalPolicy() && Stacking.stackingType != StackingType.None")]
-        [Button("Use asset name as stack identifier", ButtonSizes.Medium, Icon = SdfIconType.Hammer)]
+        [Button("使用资产名称作为堆叠识别码", ButtonSizes.Medium, Icon = SdfIconType.Hammer)]
         private void SetStackingCodeNameAsAssetName()
         {
             var stacking = Stacking;
@@ -127,7 +130,7 @@ namespace GAS.Runtime
         [TabGroup(GRP_DATA_GRANTED_ABILITIES, "Granted Abilities", SdfIconType.YinYang, TextColor = "#D6626E",
             Order = 2)]
         [EnableIf("IsDurationalPolicy")]
-        [InfoBox("Instant effects cannot grant abilities", InfoMessageType.None, VisibleIf = "@IsInstantPolicy()")]
+        [InfoBox("瞬时效果无法赋予能力", InfoMessageType.None, VisibleIf = "@IsInstantPolicy()")]
         [ListDrawerSettings(ShowFoldout = true, ShowItemCount = false)]
         [InfoBox(ERROR_GRANTED_ABILITY_INVALID, InfoMessageType.Error, VisibleIf = "IsGrantedAbilitiesInvalid")]
         public GrantedAbilityConfig[] GrantedAbilities;
@@ -139,9 +142,9 @@ namespace GAS.Runtime
         [HorizontalGroup(GRP_DATA_H, order: 1, Width = 0.618f * 0.618f)]
         [TabGroup(GRP_DATA_MOD, "Modifiers", SdfIconType.CalculatorFill, TextColor = "#FFE60B", Order = 2)]
         [ListDrawerSettings(ShowFoldout = true, ShowItemCount = false)]
-        [InfoBox("Execute multiple modifiers in sequence, pay attention to the execution order", InfoMessageType.Warning, VisibleIf = "@$value != null && $value.Length > 1")]
-        [InfoBox("Transient effects cannot modify non-Stacking properties", InfoMessageType.Error, VisibleIf = "IsModifiersHasInvalid")]
-        [LabelText(@"@IsInstantPolicy() ? ""Execute only if applied successfully"":""It is executed every time it is activated""")]
+        [InfoBox("依次执行多个修改器, 请注意执行顺序", InfoMessageType.Info, VisibleIf = "@$value != null && $value.Length > 1")]
+        [InfoBox("瞬时效果不能修改非Stacking属性", InfoMessageType.Error, VisibleIf = "IsModifiersHasInvalid")]
+        [LabelText(@"@IsInstantPolicy() ? ""仅在成功应用时执行"":""每次激活时都会执行""")]
         public GameplayEffectModifier[] Modifiers;
 
         bool IsModifiersHasInvalid()
@@ -237,7 +240,7 @@ namespace GAS.Runtime
         [InfoBox(ERROR_NONE_CUE, InfoMessageType.Error, VisibleIf = "IsCueDurationalNone")]
         [AssetSelector]
         [LabelText(GASTextDefine.TITLE_GE_CUE_CueDurational)]
-        [Tooltip("The life cycle is completely synchronized with GameplayEffect")]
+        [Tooltip("生命周期完全和GameplayEffect同步")]
         public GameplayCueDurational[] CueDurational;
 
         [Space()]

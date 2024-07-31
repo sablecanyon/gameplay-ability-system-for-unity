@@ -1,12 +1,12 @@
+using System.Collections.Generic;
+using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+using UnityEditor.Animations;
+#endif
+
 namespace GAS.General
 {
-    using System.Collections.Generic;
-#if UNITY_EDITOR
-    using UnityEditor;
-    using UnityEditor.Animations;
-#endif
-    using UnityEngine;
-    
     public static class GASAnimatorUtil
     {
         /// <summary>
@@ -17,6 +17,7 @@ namespace GAS.General
         /// <returns></returns>
         public static Dictionary<string, AnimationClip> GetAllAnimationState(this Animator animator, int layerIndex = 0)
         {
+#pragma warning disable 162
 #if UNITY_EDITOR
             var result = new Dictionary<string, AnimationClip>();
 
@@ -43,9 +44,9 @@ namespace GAS.General
                         AssetDatabase.GetAssetPath(overrideController.runtimeAnimatorController));
                 var overrides = new List<KeyValuePair<AnimationClip, AnimationClip>>();
                 overrideController.GetOverrides(overrides);
-                // Get the state machine of the Layer
+                // 获取 Layer 的状态机
                 var stateMachine = controller.layers[layerIndex].stateMachine;
-                // Iterate through all states and print the name
+                // 遍历所有状态并打印名称
                 foreach (var state in stateMachine.states)
                 {
                     if (state.state.motion is AnimationClip clip)
@@ -58,8 +59,8 @@ namespace GAS.General
                                 break;
                             }
                         }
-                        
-                        if(!result.ContainsKey(state.state.name)) result.Add(state.state.name, clip);
+
+                        if (!result.ContainsKey(state.state.name)) result.Add(state.state.name, clip);
                     }
                 }
             }
@@ -73,9 +74,9 @@ namespace GAS.General
                     return null;
                 }
 
-                // Get the state machine of the first Layer
+                // 获取第一个 Layer 的状态机
                 var stateMachine = controller.layers[layerIndex].stateMachine;
-                // Iterate through all states and print the name
+                // 遍历所有状态并打印名称
                 foreach (var state in stateMachine.states)
                     result.Add(state.state.name, state.state.motion as AnimationClip);
             }
@@ -83,6 +84,7 @@ namespace GAS.General
             return result;
 #endif
             return null;
+#pragma warning restore 162
         }
     }
 }

@@ -43,7 +43,7 @@ namespace GAS.Editor
             if (invalidAttributes.Length > 0)
             {
                 var msg =
-                    $"Attributes with calculation mode \"minimum\" or \"maximum\" can only support \"replace\" operation:\n{string.Join("\n", invalidAttributes.Select(x => $"\"{x.Name}\""))}";
+                    $"计算模式为\"取最小值\"或\"取最大值\"的属性只能支持\"替换\"操作：\n{string.Join("\n", invalidAttributes.Select(x => $"\"{x.Name}\""))}";
                 Debug.LogError(msg.Replace("\n", ", "));
                 EditorUtility.DisplayDialog("Error", msg, "OK");
                 return;

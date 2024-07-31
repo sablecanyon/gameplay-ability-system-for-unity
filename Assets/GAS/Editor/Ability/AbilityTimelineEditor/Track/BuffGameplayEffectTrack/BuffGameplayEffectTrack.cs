@@ -55,7 +55,7 @@ namespace GAS.Editor
 
         protected override void OnAddTrackItem(DropdownMenuAction action)
         {
-            // Add Clip Data
+            // 添加Clip数据
             var clipEvent = new BuffGameplayEffectClipEvent
             {
                 startFrame = GetTrackIndexByMouse(action.eventInfo.localMousePosition.x),
@@ -63,12 +63,12 @@ namespace GAS.Editor
             };
             BuffTrackDataForSave.clipEvents.Add(clipEvent);
 
-            // Refresh Display
+            // 刷新显示
             var item = new BuffGameplayEffectClip();
             item.InitTrackClip(this, Track, _frameWidth, clipEvent);
             _trackItems.Add(item);
 
-            // Select the new Clip
+            // 选中新Clip
             item.ClipVe.OnSelect();
 
             Debug.Log("[EX] Add a new Buff GameplayEffect Clip");
@@ -76,10 +76,10 @@ namespace GAS.Editor
 
         protected override void OnRemoveTrack(DropdownMenuAction action)
         {
-            // delete data
+            // 删除数据
             AbilityAsset.BuffGameplayEffects.Remove(_buffGameplayEffectTrackData);
             AbilityTimelineEditorWindow.Instance.Save();
-            // Delete Display
+            // 删除显示
             TrackParent.Remove(TrackRoot);
             MenuParent.Remove(MenuRoot);
             Debug.Log("[EX] Remove Durational Cue Track");

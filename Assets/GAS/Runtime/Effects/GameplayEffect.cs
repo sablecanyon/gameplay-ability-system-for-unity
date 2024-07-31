@@ -5,13 +5,13 @@ namespace GAS.Runtime
 {
     public enum EffectsDurationPolicy
     {
-        [LabelText("Instant", SdfIconType.LightningCharge)]
+        [LabelText("瞬时(Instant)", SdfIconType.LightningCharge)]
         Instant = 1,
 
-        [LabelText("Infinite", SdfIconType.Infinity)]
+        [LabelText("永久(Infinite)", SdfIconType.Infinity)]
         Infinite,
 
-        [LabelText("Duration", SdfIconType.HourglassSplit)]
+        [LabelText("限时(Duration)", SdfIconType.HourglassSplit)]
         Duration
     }
 
@@ -57,7 +57,7 @@ namespace GAS.Runtime
         }
 
         /// <summary>
-        /// The instantiation process of separating GameplayEffectSpec is: instance + data initialization
+        /// 分离GameplayEffectSpec的实例化过程为：实例 + 数据初始化
         /// </summary>
         /// <returns></returns>
         public GameplayEffectSpec CreateSpec()
@@ -65,9 +65,14 @@ namespace GAS.Runtime
             var spec = new GameplayEffectSpec(this);
             return spec;
         }
-        
+
         public GameplayEffect(IGameplayEffectData data)
         {
+            if (data is null)
+            {
+                throw new System.Exception($"GE data can't be null!");
+            }
+
             GameplayEffectName = data.GetDisplayName();
             DurationPolicy = data.GetDurationPolicy();
             Duration = data.GetDuration();
@@ -126,7 +131,7 @@ namespace GAS.Runtime
             if (effect.Stacking.stackingType == StackingType.None) return false;
             if (string.IsNullOrEmpty(Stacking.stackingCodeName)) return false;
             if (string.IsNullOrEmpty(effect.Stacking.stackingCodeName)) return false;
-            
+
             return Stacking.stackingHashCode == effect.Stacking.stackingHashCode;
         }
     }

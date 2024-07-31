@@ -8,7 +8,7 @@
         float GetPeriod();
 
         /// <summary>
-        /// Must be an Instant GameplayEffect
+        /// 必须是Instant型的GameplayEffect
         /// </summary>
         IGameplayEffectData GetPeriodExecution();
 

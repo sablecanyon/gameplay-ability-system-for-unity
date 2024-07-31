@@ -17,7 +17,7 @@ namespace GAS.Runtime
             Owner = owner;
         }
 
-        [Obsolete("Please use the CatchTargetsNonAlloc method to avoid garbage collection (GC).")]
+        [Obsolete("请使用CatchTargetsNonAlloc方法来避免产生垃圾收集（GC）。")]
         public List<AbilitySystemComponent> CatchTargets(AbilitySystemComponent mainTarget)
         {
             var result = new List<AbilitySystemComponent>();

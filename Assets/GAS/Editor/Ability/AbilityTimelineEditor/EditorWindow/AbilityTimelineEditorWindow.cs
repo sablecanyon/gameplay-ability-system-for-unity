@@ -11,7 +11,7 @@ using Object = UnityEngine.Object;
 namespace GAS.Editor
 {
     /// <summary>
-    /// This class is referenced by reflection, please be careful when refactoring!!
+    /// 这个类被反射引用到, 重构请小心!!
     /// </summary>
     public class AbilityTimelineEditorWindow : EditorWindow
     {
@@ -46,7 +46,7 @@ namespace GAS.Editor
         }
 
         /// <summary>
-        /// This method is referenced by reflection, please be careful when refactoring!!
+        /// 这个方法被反射引用到, 重构请小心!!
         /// </summary>
         public static void ShowWindow(TimelineAbilityAssetBase asset)
         {
@@ -54,7 +54,7 @@ namespace GAS.Editor
             wnd.titleContent = new GUIContent("AbilityTimelineEditorWindow");
             wnd.InitAbility(asset);
 
-            // Open the sub-Inspector
+            // 打开子Inspector
             EditorApplication.delayCall += () => wnd.ShowChildInspector();
         }
 
@@ -160,14 +160,14 @@ namespace GAS.Editor
 
         private void OnPreviewObjectChanged(ChangeEvent<Object> evt)
         {
-            // TODO : Handle changes to the preview object here
+            // TODO : 在这里处理预览对象的变化
         }
 
         private void BackToScene()
         {
-            // Determine whether there is a record of the previous Scene
+            // 判断是否有记录前一个Scene
             if (!string.IsNullOrEmpty(_previousScenePath))
-                // Activate the previous Scene
+                // 激活前一个Scene
                 EditorSceneManager.OpenScene(_previousScenePath);
             else
                 Debug.LogWarning("No previous scene available.");
@@ -175,15 +175,15 @@ namespace GAS.Editor
 
         private void LoadPreviewScene()
         {
-            // Record the current scene
+            // 记录当前Scene
             _previousScenePath = SceneManager.GetActiveScene().path;
-            // Creating a New Scene
+            // 创建一个新的Scene
             var newScene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
-            // Add temporary preview content here, such as placing some objects
-            // This is just a demonstration, you can add your own content according to your needs
+            // 在这里添加临时预览的内容，例如放置一些对象
+            // 这里只是演示，具体可以根据需求添加你的内容
             // GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
             // SceneManager.MoveGameObjectToScene(cube, newScene);
-            // Activate the newly created Scene
+            // 激活新创建的Scene
             SceneManager.SetActiveScene(newScene);
         }
 

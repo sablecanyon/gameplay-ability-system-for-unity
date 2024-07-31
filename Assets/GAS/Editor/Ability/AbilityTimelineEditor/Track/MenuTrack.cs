@@ -54,16 +54,16 @@ namespace GAS.Editor
 
         private void OnClickAddTrack()
         {
-            // CreateView
+            // 创建View
             var track = (TrackBase)Activator.CreateInstance(_trackType);
             if (track.IsFixedTrack()) return;
 
-            // CreateData
+            // 创建Data
             var data = (TrackDataBase)Activator.CreateInstance(_trackDataType);
             data.DefaultInit();
             data.AddToAbilityAsset(AbilityAsset);
 
-            // InitializeView
+            // 初始化View
             track.Init(TrackParent, MenuParent, Config.FrameUnitWidth, data);
             TrackParent.Remove(track.TrackRoot);
             MenuParent.Remove(track.MenuRoot);

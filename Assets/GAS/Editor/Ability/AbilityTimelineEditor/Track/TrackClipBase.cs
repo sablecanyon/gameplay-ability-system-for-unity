@@ -50,7 +50,7 @@ namespace GAS.Editor
         {
             FrameUnitWidth = newFrameUnitWidth;
 
-            // Clip position, width
+            // clip位置，宽度
             var mainPos = ve.transform.position;
             mainPos.x = StartFrameIndex * FrameUnitWidth;
             ve.transform.position = mainPos;

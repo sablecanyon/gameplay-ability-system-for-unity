@@ -81,7 +81,7 @@ namespace GAS.Runtime
             
             if (effectSpec.GameplayEffect.IsImmune(_owner))
             {
-                // TODO 免疫Cue触发 translation:Immune Cue Trigger
+                // TODO 免疫Cue触发
                 // var lv = overwriteEffectLevel ? effectLevel : source.Level;
                 // effectSpec.Init(source, _owner, lv);
                 // effectSpec.TriggerOnImmunity();
@@ -102,12 +102,12 @@ namespace GAS.Runtime
                 return Operation_AddNewGameplayEffectSpec(source, effectSpec,overwriteEffectLevel,effectLevel);
             }
             
-            // Handling GE stacking
-            // Based on Target type GE stacking
+            // 处理GE堆叠
+            // 基于Target类型GE堆叠
             if (effectSpec.Stacking.stackingType == StackingType.AggregateByTarget)
             {
                 GetStackingEffectSpecByData(effectSpec.GameplayEffect, out var geSpec);
-                // Newly added GE
+                // 新添加GE
                 if (geSpec == null)
                     return Operation_AddNewGameplayEffectSpec(source, effectSpec,overwriteEffectLevel,effectLevel);
                 bool stackCountChange = geSpec.RefreshStack();
@@ -115,7 +115,7 @@ namespace GAS.Runtime
                 return geSpec;
             }
             
-            // Based on Source type GE stacking
+            // 基于Source类型GE堆叠
             if (effectSpec.Stacking.stackingType == StackingType.AggregateBySource)
             {
                 GetStackingEffectSpecByDataFrom(effectSpec.GameplayEffect,source, out var geSpec);

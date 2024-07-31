@@ -4,8 +4,8 @@
     {
 #if UNITY_EDITOR
         /// <summary>
-        /// For editor preview
-        /// 【Note】 When overriding, remember to wrap it with the UNITY_EDITOR macro. This is a function for preview performance and should not be compiled.
+        /// 编辑器预览用
+        /// 【注意】 覆写时，记得用UNITY_EDITOR宏包裹，这是预览表现用的函数，不该被编译。
         /// </summary>
         /// <param name="frame"></param>
         /// <param name="startFrame"></param>

@@ -5,7 +5,7 @@ namespace GAS.General
 {
     public class GASTimer
     {
-        // TODO Correct time difference (server-client time difference/time difference caused by pausing the game)
+        // TODO 矫正时间差(服务器客户端时间差/暂停游戏导致的时间差)
         static int _deltaTime;
         
         public static long Timestamp() => DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() + _deltaTime;

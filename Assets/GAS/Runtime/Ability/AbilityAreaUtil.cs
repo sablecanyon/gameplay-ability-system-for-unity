@@ -12,7 +12,7 @@ namespace GAS.Runtime
 
     public static class AbilityAreaUtil
     {
-        [Obsolete("Please use OverlapBox2DNonAlloc method to avoid garbage collection (GC).")]
+        [Obsolete("请使用OverlapBox2DNonAlloc方法来避免产生垃圾收集（GC）。")]
         public static Collider2D[] OverlapBox2D(this AbilitySystemComponent asc, Vector2 offset, Vector2 size,
             float angle, int layerMask, Transform relativeTransform = null)
         {
@@ -51,7 +51,7 @@ namespace GAS.Runtime
             };
         }
 
-        [Obsolete("Please use OverlapCircle2DNonAlloc method to avoid garbage collection (GC).")]
+        [Obsolete("请使用OverlapCircle2DNonAlloc方法来避免产生垃圾收集（GC）。")]
         public static Collider2D[] OverlapCircle2D(this AbilitySystemComponent asc, Vector2 offset, float radius,
             int layerMask, Transform relativeTransform = null)
         {

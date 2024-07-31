@@ -97,7 +97,7 @@ namespace GAS.Editor
 
         void RefreshTaskInspector()
         {
-            // Display the corresponding properties according to the selected OngoingAbilityTask subclass
+            // 根据选择的OngoingAbilityTask子类，显示对应的属性
             var ongoingAbilityTask = _clip.TaskClipData.Load();
             if (OngoingTaskInspectorMap.TryGetValue(ongoingAbilityTask.GetType(), out var inspectorType))
             {
@@ -113,7 +113,7 @@ namespace GAS.Editor
 
         private void OnDurationFrameChanged()
         {
-            // Clamp
+            // 钳制
             var max = AbilityAsset.FrameCount - _clip.ClipDataForSave.startFrame;
             Duration = Mathf.Clamp(Duration, 1, max);
             _clip.UpdateClipDataDurationFrame(Duration);

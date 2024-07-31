@@ -24,7 +24,7 @@ namespace GAS.Editor
 
         public override void Duplicate()
         {
-            // Add Mark Data
+            // 添加Mark数据
             var startFrame = markData.startFrame < AbilityAsset.FrameCount
                 ? markData.startFrame + 1
                 : markData.startFrame - 1;

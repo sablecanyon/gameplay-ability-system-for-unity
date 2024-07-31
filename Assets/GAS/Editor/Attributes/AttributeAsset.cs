@@ -120,7 +120,7 @@ namespace GAS.Editor
 
         private void OnAddAttribute()
         {
-            StringEditWindow.OpenWindow("Create New Attributes", null, newName =>
+            StringEditWindow.OpenWindow("创建新属性", null, newName =>
             {
                 var validateVariableName = Validations.ValidateVariableName(newName);
 
@@ -131,7 +131,7 @@ namespace GAS.Editor
 
                 if (attributes.Exists(x => x.Name == newName))
                 {
-                    return ValidationResult.Invalid($"The attribute name already exists: \"{newName}\"!");
+                    return ValidationResult.Invalid($"属性名已存在: \"{newName}\"!");
                 }
 
                 return ValidationResult.Valid;
@@ -178,7 +178,7 @@ namespace GAS.Editor
             private string DisplayName => $"{Name} - {Comment}";
 
             [FoldoutGroup("$DisplayName", false)]
-            [LabelText("Attribute name"), LabelWidth(LabelWidth)]
+            [LabelText("属性名"), LabelWidth(LabelWidth)]
             [DelayedProperty]
             [ValidateInput("@OnNameChanged($value)", "Attribute name is invalid!")]
             [PropertyOrder(1)]
@@ -193,12 +193,12 @@ namespace GAS.Editor
 
             [FoldoutGroup("$DisplayName")]
             [DelayedProperty]
-            [LabelText("Description"), LabelWidth(LabelWidth)]
+            [LabelText("备注"), LabelWidth(LabelWidth)]
             [PropertyOrder(2)]
             public string Comment = "";
 
             [FoldoutGroup("$DisplayName")]
-            [LabelText("Calculation Mode"), LabelWidth(LabelWidth)]
+            [LabelText("计算模式"), LabelWidth(LabelWidth)]
             [PropertyOrder(3)]
             [OnValueChanged("@OnCalculateModeChanged()")]
             [HorizontalGroup("$DisplayName/d")]
@@ -213,7 +213,7 @@ namespace GAS.Editor
             }
 
             [FoldoutGroup("$DisplayName")]
-            [LabelText("Supported operations"), LabelWidth(LabelWidth)]
+            [LabelText("支持运算"), LabelWidth(LabelWidth)]
             [PropertyOrder(4)]
             [DisableIf(
                 "@CalculateMode == GAS.Runtime.CalculateMode.MinValueOnly || CalculateMode == GAS.Runtime.CalculateMode.MaxValueOnly")]
@@ -221,14 +221,14 @@ namespace GAS.Editor
             public SupportedOperation SupportedOperation = SupportedOperation.All;
 
             [FoldoutGroup("$DisplayName")]
-            [LabelText("Default value"), LabelWidth(LabelWidth)]
+            [LabelText("默认值"), LabelWidth(LabelWidth)]
             [DelayedProperty]
             [PropertyOrder(5)]
             [HorizontalGroup("$DisplayName/Values")]
             public float DefaultValue = 0f;
 
             [FoldoutGroup("$DisplayName")]
-            [LabelText("minimum value"), LabelWidth(40)]
+            [LabelText("最小值"), LabelWidth(40)]
             [DelayedProperty]
             [PropertyOrder(6)]
             [HorizontalGroup("$DisplayName/Values")]
@@ -244,7 +244,7 @@ namespace GAS.Editor
             public float MinValue = float.MinValue;
 
             [FoldoutGroup("$DisplayName")]
-            [LabelText("maximum value"), LabelWidth(50)]
+            [LabelText("最大值"), LabelWidth(50)]
             [DelayedProperty]
             [PropertyOrder(6)]
             [HorizontalGroup("$DisplayName/Values")]

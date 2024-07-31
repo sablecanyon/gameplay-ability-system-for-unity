@@ -10,7 +10,7 @@ namespace GAS.Runtime
         AbilitySystemComponent _owner;
 
         /// <summary>
-        ///  The order of the modifiers is important because the modifiers are executed in order.
+        ///  modifiers的顺序很重要，因为modifiers的执行是按照顺序来的。
         /// </summary>
         private List<Tuple<GameplayEffectSpec, GameplayEffectModifier>> _modifierCache =
             new List<Tuple<GameplayEffectSpec, GameplayEffectModifier>>();
@@ -40,7 +40,7 @@ namespace GAS.Runtime
         /// </summary>
         void RefreshModifierCache()
         {
-            // Unregister attribute change monitoring callback
+            // 注销属性变化监听回调
             UnregisterAttributeChangedListen();
             _modifierCache.Clear();
             var gameplayEffects = _owner.GameplayEffectContainer.GameplayEffects();
@@ -63,11 +63,11 @@ namespace GAS.Runtime
         }
 
         /// <summary>
-        /// Calculate a new value for CurrentValue. (BaseValue changes depend on the instant GameplayEffect.)
-        /// This method is triggered when:
-        /// 1. _modifierCache changes
-        /// 2. _processedAttribute's BaseValue changes
-        /// 3. _modifierCache's AttributeBased class MMC, Track class attributes change
+        /// 为CurrentValue计算新值。 (BaseValue的变化依赖于instant型GameplayEffect.)
+        /// 这个方法的触发时机为：
+        /// 1._modifierCache变化时
+        /// 2._processedAttribute的BaseValue变化时
+        /// 3._modifierCache的AttributeBased类的MMC，Track类属性变化时
         /// </summary>
         /// <returns></returns>
         float CalculateNewValue()

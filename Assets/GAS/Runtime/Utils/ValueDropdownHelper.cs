@@ -8,9 +8,9 @@ namespace GAS.Runtime
     public static class ValueDropdownHelper
     {
         /// <summary>
-        /// Displays a drop-down list containing all property set names.
+        /// 显示一个下列列表, 包含所有的属性集名称.
         /// <example>
-        /// Example of use:
+        /// 使用示例：
         /// <code>
         /// [ValueDropdown("@ValueDropdownHelper.AttributeSetChoices", IsUniqueList = true)]
         /// public string AttributeSet;
@@ -20,9 +20,9 @@ namespace GAS.Runtime
         public static IEnumerable<string> AttributeSetChoices => ReflectionHelper.AttributeSetNames;
 
         /// <summary>
-        /// Displays a drop-down list containing all property names.
+        /// 显示一个下拉列表，包含所有的属性名称.
         /// <example>
-        /// Example of use:
+        /// 使用示例：
         /// <code>
         /// [ValueDropdown("@ValueDropdownHelper.AttributeChoices", IsUniqueList = true)]
         /// public string Attribute;
@@ -34,9 +34,9 @@ namespace GAS.Runtime
         private static ValueDropdownItem[] _gameplayTagChoices;
 
         /// <summary>
-        /// Displays a drop-down list containing all GameplayTags.
+        /// 显示一个下拉列表，包含所有的GameplayTag.
         /// <example>
-        /// Example of use:
+        /// 使用示例：
         /// <code>
         /// [ValueDropdown("@ValueDropdownHelper.GameplayTagChoices", IsUniqueList = true, HideChildProperties = true)]
         /// public GameplayTag[] Tags;

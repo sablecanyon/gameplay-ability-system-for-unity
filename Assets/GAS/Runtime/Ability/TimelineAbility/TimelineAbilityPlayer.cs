@@ -48,7 +48,7 @@ namespace GAS.Runtime
         private readonly List<ReleaseGameplayEffectMarkEvent> _cacheReleaseGameplayEffect = new();
 
         // cache for target catcher, avoid new in TickFrame
-        // This is a generic class, so this variable is not static.
+        // 这个是一个泛型类, 这个变量就不作为static了
         private readonly List<AbilitySystemComponent> _targets = new();
 
         private int _currentFrame;
@@ -197,7 +197,7 @@ namespace GAS.Runtime
 
         public void Play()
         {
-            _currentFrame = -1; // In order to play the 0th frame
+            _currentFrame = -1; // 为了播放第0帧
             _playTotalTime = 0;
             IsPlaying = true;
             Prepare();
@@ -234,24 +234,22 @@ namespace GAS.Runtime
             _playTotalTime += Time.deltaTime;
             var targetFrame = (int)(_playTotalTime * FrameRate);
 
-            // Frame Chasing
+            // 追帧
             while (_currentFrame < targetFrame)
             {
                 _currentFrame++;
                 TickFrame(_currentFrame);
             }
-            
-            TickUpdate(_currentFrame);//todo my code
 
             if (_currentFrame >= FrameCount)
             {
-                _currentFrame++; //Make sure not to trigger the cue's onRemove repeatedly
+                _currentFrame++; //确保不重复触发cue的onRemove
                 OnPlayEnd();
             }
         }
 
         /// <summary>
-        /// End of playback
+        /// 播放结束
         /// </summary>
         private void OnPlayEnd()
         {
@@ -263,7 +261,7 @@ namespace GAS.Runtime
         }
 
         /// <summary>
-        /// Events of the current frame
+        /// 当前帧的事件
         /// </summary>
         /// <param name="frame"></param>
         private void TickFrame(int frame)
@@ -274,19 +272,6 @@ namespace GAS.Runtime
             TickFrame_DurationalGameplayCues(frame);
             TickFrame_BuffGameplayEffects(frame);
             TickFrame_OngoingTasks(frame);
-        }
-        
-        //todo my code
-        private void TickUpdate(int frame)
-        {
-            foreach (var cueClip in _cacheDurationalCueTrack)
-            {
-                if (frame >= cueClip.startFrame && frame <= cueClip.endFrame)
-                {
-                    cueClip.cueSpec.OnTickUpdate();
-                }
-                
-            }
         }
 
         private void TickFrame_InstantGameplayCues(int frame)
@@ -362,7 +347,7 @@ namespace GAS.Runtime
 
         private void TickFrame_BuffGameplayEffects(int frame)
         {
-            // The buff duration is based on the Timeline configuration time (all execution strategies are changed to Infinite)
+            // buff持续时间以Timeline配置时间为准（执行策略全部改为Infinite）
             // Profiler.BeginSample("TickFrame_BuffGameplayEffects");
             // {
                 foreach (var buffClip in _cacheBuffGameplayEffectTrack)

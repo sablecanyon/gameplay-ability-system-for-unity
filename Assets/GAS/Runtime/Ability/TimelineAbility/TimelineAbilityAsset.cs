@@ -13,7 +13,7 @@ namespace GAS.Runtime
         [TitleGroup("Data")]
         [HorizontalGroup("Data/H1", 1 / 3f)]
         [TabGroup("Data/H1/V1", "Timeline", SdfIconType.ClockHistory, TextColor = "#00FF00")]
-        [Button("View/Edit Ability Timeline", ButtonSizes.Large, Icon = SdfIconType.Hammer)]
+        [Button("查看/编辑能力时间轴", ButtonSizes.Large, Icon = SdfIconType.Hammer)]
         [PropertyOrder(-1)]
         private void EditAbilityTimeline()
         {
@@ -27,7 +27,7 @@ namespace GAS.Runtime
             catch (Exception e)
             {
                 Debug.LogError(
-                    $"Calling the static method ShowWindow(TimelineAbilityAsset asset) of the \"GAS.Editor.AbilityTimelineEditorWindow\" class failed. The code may have been refactored: {e}");
+                    $"调用\"GAS.Editor.AbilityTimelineEditorWindow\"类的静态方法ShowWindow(TimelineAbilityAsset asset)失败, 代码可能被重构了: {e}");
             }
         }
 
@@ -37,7 +37,7 @@ namespace GAS.Runtime
         public bool manualEndAbility;
 
         [HideInInspector]
-        public int FrameCount; // Ability end time
+        public int FrameCount; // 能力结束时间
 
         [HideInInspector]
         public List<DurationalCueTrackData> DurationalCues = new List<DurationalCueTrackData>();
@@ -75,7 +75,7 @@ namespace GAS.Runtime
     }
 
     /// <summary>
-    /// This is the simplest TimelineAbilityAsset implementation. If you want to implement a more complex TimelineAbilityAsset, please use TimelineAbilityAssetBase or TimelineAbilityAssetT as the base class.
+    /// 这是一个最朴素的TimelineAbilityAsset实现, 如果要实现更复杂的TimelineAbilityAsset, 请用TimelineAbilityAssetBase或TimelineAbilityAssetT为基类
     /// </summary>
     public sealed class TimelineAbilityAsset : TimelineAbilityAssetT<TimelineAbility>
     {

@@ -14,7 +14,9 @@ namespace GAS.Runtime
         /// <summary>
         /// The execution type of onImmunity is one shot.
         /// </summary>
+#pragma warning disable CS0067 // 事件从未使用过
         public event Action<AbilitySystemComponent, GameplayEffectSpec> onImmunity;
+#pragma warning restore CS0067 // 事件从未使用过
         
         public event Action<int,int> onStackCountChanged;
 
@@ -64,7 +66,7 @@ namespace GAS.Runtime
         public Dictionary<string, float> SnapshotTargetAttributes { get; private set; }
 
         /// <summary>
-        /// Stack Count
+        /// 堆叠数
         /// </summary>
         public int StackCount { get; private set; } = 1;
         
@@ -276,7 +278,7 @@ namespace GAS.Runtime
 
         public void TriggerOnImmunity()
         {
-            // TODO The logic of immune triggering events needs to be adjusted
+            // TODO 免疫触发事件逻辑需要调整
             // onImmunity?.Invoke(Owner, this);
             // onImmunity = null;
         }
@@ -360,7 +362,7 @@ namespace GAS.Runtime
         /// <summary>
         /// 
         /// </summary>
-        /// <returns>Whether the Stack Count changes</returns>
+        /// <returns>Stack Count是否变化</returns>
         public bool RefreshStack()
         {
             var oldStackCount = StackCount;
@@ -373,14 +375,14 @@ namespace GAS.Runtime
         {
             if (stackCount <= Stacking.limitCount)
             {
-                // Update the stack count
-                StackCount = Mathf.Max(1,stackCount); // The minimum number of stacks is 1
-                // Whether to refresh Duration
+                // 更新栈数
+                StackCount = Mathf.Max(1,stackCount); // 最小层数为1
+                // 是否刷新Duration
                 if (Stacking.durationRefreshPolicy == DurationRefreshPolicy.RefreshOnSuccessfulApplication)
                 {
                     RefreshDuration();
                 }
-                // Whether to reset Period
+                // 是否重置Period
                 if (Stacking.periodResetPolicy == PeriodResetPolicy.ResetOnSuccessfulApplication)
                 {
                     PeriodTicker.ResetPeriod();
@@ -388,7 +390,7 @@ namespace GAS.Runtime
             }
             else
             {
-                // Overflow GE takes effect
+                // 溢出GE生效
                 foreach (var overflowEffect in Stacking.overflowEffects)
                     Owner.ApplyGameplayEffectToSelf(overflowEffect);
 
@@ -396,7 +398,7 @@ namespace GAS.Runtime
                 {
                     if (Stacking.denyOverflowApplication)
                     {
-                        //This is only effective when DenyOverflowApplication is True. When Overflow occurs, all layers are deleted directly.
+                        //当DenyOverflowApplication为True是才有效，当Overflow时是否直接删除所有层数
                         if (Stacking.clearStackOnOverflow)
                         {
                             RemoveSelf();

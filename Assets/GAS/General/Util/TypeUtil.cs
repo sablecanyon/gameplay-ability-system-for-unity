@@ -37,22 +37,22 @@ namespace GAS.General
                     Type type = assembly.GetType(typeName);
                     if (type != null)
                     {
-                        // If the type is found, return it
+                        // 如果找到了类型，返回它
                         return type;
                     }
                 }
                 catch (ReflectionTypeLoadException)
                 {
-                    // Ignore exceptions thrown due to failure to load a type
+                    // 忽略因无法加载类型而引发的异常
                 }
             }
 
-            // If the type is not found, returns null.
+            // 如果没有找到类型，返回null
             return null;
         }
 
         /// <summary>
-        /// Get the inheritance chain of a type
+        /// 获取类型的继承链
         /// </summary>
         public static string[] GetInheritanceChain(this Type type, bool fullName = true)
         {

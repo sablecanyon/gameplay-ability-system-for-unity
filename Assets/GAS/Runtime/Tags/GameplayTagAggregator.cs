@@ -210,7 +210,7 @@ namespace GAS.Runtime
                         _pool.Return(tagList);
 
                         Profiler.BeginSample("[GC Mark]remove dynamic tag");
-                        dynamicTag.Remove(tag); // There is GC
+                        dynamicTag.Remove(tag); // 有 GC
                         Profiler.EndSample();
                     }
                 }
@@ -280,7 +280,7 @@ namespace GAS.Runtime
 
         public bool HasTag(GameplayTag tag)
         {
-            // LINQ expressions have GC, and HasTag is called frequently, so foreach is used here.
+            // LINQ表达式存在GC，且HasTag调用频率很高，所以这里全都使用foreach
             var fixedTagsContainsTag = false;
             foreach (var t in _fixedTags)
             {

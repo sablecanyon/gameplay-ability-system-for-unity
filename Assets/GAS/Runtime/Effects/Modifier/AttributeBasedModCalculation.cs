@@ -8,38 +8,38 @@ namespace GAS.Runtime
     {
         public enum AttributeFrom
         {
-            [LabelText("Source", SdfIconType.Magic)]
+            [LabelText("来源(Source)", SdfIconType.Magic)]
             Source,
 
-            [LabelText("Target", SdfIconType.Person)]
+            [LabelText("目标(Target)", SdfIconType.Person)]
             Target
         }
 
         public enum GEAttributeCaptureType
         {
-            [LabelText("SnapShot", SdfIconType.Camera)]
+            [LabelText("快照(SnapShot)", SdfIconType.Camera)]
             SnapShot,
 
-            [LabelText("Track", SdfIconType.Speedometer2)]
+            [LabelText("实时(Track)", SdfIconType.Speedometer2)]
             Track
         }
 
         [TabGroup("Default", "AttributeBasedModCalculation", SdfIconType.PersonBoundingBox, TextColor = "blue")]
-        [InfoBox(" Which attribute value (Attribute Name) is captured from whom (Attribute From) and in what way (Capture Type).")]
+        [InfoBox(" 以什么方式(Capture Type)从谁身上(Attribute From)捕获哪个属性的值(Attribute Name)。")]
         [EnumToggleButtons]
-        [LabelText("Capture Type")]
+        [LabelText("捕获方式(Capture Type)")]
         public GEAttributeCaptureType captureType;
 
         [TabGroup("Default", "AttributeBasedModCalculation")]
         [EnumToggleButtons]
-        [LabelText("Capture Target(Attribute From)")]
+        [LabelText("捕获目标(Attribute From)")]
         public AttributeFrom attributeFromType;
 
         [TabGroup("Default", "AttributeBasedModCalculation")]
         [ValueDropdown("@ValueDropdownHelper.AttributeChoices", IsUniqueList = true)]
-        [LabelText("Attribute Name")]
+        [LabelText("属性的名称(Attribute Name)")]
         [OnValueChanged("@OnAttributeNameChanged()")]
-        [InfoBox("No attribute name specified", InfoMessageType.Error, VisibleIf = "@string.IsNullOrWhiteSpace(attributeName)")]
+        [InfoBox("未指定属性名称", InfoMessageType.Error, VisibleIf = "@string.IsNullOrWhiteSpace(attributeName)")]
         public string attributeName;
 
         [TabGroup("Default", "Details", SdfIconType.Bug, TextColor = "orange")]
@@ -50,13 +50,13 @@ namespace GAS.Runtime
         [ReadOnly]
         public string attributeShortName;
 
-        [InfoBox("The calculation logic is the same as ScalableFloatModCalculation, formula: AttributeValue * k + b")]
+        [InfoBox("计算逻辑与ScalableFloatModCalculation一致, 公式：AttributeValue * k + b")]
         [TabGroup("Default", "AttributeBasedModCalculation")]
-        [LabelText("Coefficient (k)")]
+        [LabelText("系数(k)")]
         public float k = 1;
 
         [TabGroup("Default", "AttributeBasedModCalculation")]
-        [LabelText("Constant (b)")]
+        [LabelText("常量(b)")]
         public float b = 0;
 
         public override float CalculateMagnitude(GameplayEffectSpec spec, float modifierMagnitude)

@@ -6,19 +6,19 @@ namespace GAS.Runtime
 {
     public enum GEOperation
     {
-        [LabelText(SdfIconType.PlusLg, Text = "Add")]
+        [LabelText(SdfIconType.PlusLg, Text = "加")]
         Add = 0,
 
-        [LabelText(SdfIconType.DashLg, Text = "Minus")]
+        [LabelText(SdfIconType.DashLg, Text = "减")]
         Minus = 3,
 
-        [LabelText(SdfIconType.XLg, Text = "Multiply")]
+        [LabelText(SdfIconType.XLg, Text = "乘")]
         Multiply = 1,
 
-        [LabelText(SdfIconType.SlashLg, Text = "Divide")]
+        [LabelText(SdfIconType.SlashLg, Text = "除")]
         Divide = 4,
 
-        [LabelText(SdfIconType.Pencil, Text = "Override")]
+        [LabelText(SdfIconType.Pencil, Text = "替")]
         Override = 2,
     }
 
@@ -27,19 +27,19 @@ namespace GAS.Runtime
     {
         None = 0,
 
-        [LabelText(SdfIconType.PlusLg, Text = "Add")]
+        [LabelText(SdfIconType.PlusLg, Text = "加")]
         Add = 1 << GEOperation.Add,
 
-        [LabelText(SdfIconType.DashLg, Text = "Minus")]
+        [LabelText(SdfIconType.DashLg, Text = "减")]
         Minus = 1 << GEOperation.Minus,
 
-        [LabelText(SdfIconType.XLg, Text = "Multiply")]
+        [LabelText(SdfIconType.XLg, Text = "乘")]
         Multiply = 1 << GEOperation.Multiply,
 
-        [LabelText(SdfIconType.SlashLg, Text = "Divide")]
+        [LabelText(SdfIconType.SlashLg, Text = "除")]
         Divide = 1 << GEOperation.Divide,
 
-        [LabelText(SdfIconType.Pencil, Text = "Override")]
+        [LabelText(SdfIconType.Pencil, Text = "替")]
         Override = 1 << GEOperation.Override,
 
         All = Add | Minus | Multiply | Divide | Override
@@ -50,12 +50,12 @@ namespace GAS.Runtime
     {
         private const int LABEL_WIDTH = 70;
 
-        [LabelText("Modify properties", SdfIconType.Fingerprint)]
+        [LabelText("修改属性", SdfIconType.Fingerprint)]
         [LabelWidth(LABEL_WIDTH)]
         [OnValueChanged("OnAttributeChanged")]
         [ValueDropdown("@ValueDropdownHelper.AttributeChoices", IsUniqueList = true)]
-        [Tooltip("Refers to the modified properties of the GameplayEffect object.")]
-        [InfoBox("No attribute selected", InfoMessageType.Error, VisibleIf = "@string.IsNullOrWhiteSpace($value)")]
+        [Tooltip("指的是GameplayEffect作用对象被修改的属性。")]
+        [InfoBox("未选择属性", InfoMessageType.Error, VisibleIf = "@string.IsNullOrWhiteSpace($value)")]
         [SuffixLabel("@ReflectionHelper.GetAttribute($value)?.CalculateMode")]
         [PropertyOrder(1)]
         public string AttributeName;
@@ -66,25 +66,25 @@ namespace GAS.Runtime
         [HideInInspector]
         public string AttributeShortName;
 
-        [LabelText("Operation parameters", SdfIconType.Activity)]
+        [LabelText("运算参数", SdfIconType.Activity)]
         [LabelWidth(LABEL_WIDTH)]
-        [Tooltip("Modifier's base value. How this value is used is determined by the MMC's operating logic. \nThis value is used directly when MMC is not specified.")]
-        [InfoBox("Divisor cannot be zero", InfoMessageType.Error,
+        [Tooltip("修改器的基础数值。这个数值如何使用由MMC的运行逻辑决定。\nMMC未指定时直接使用这个值。")]
+        [InfoBox("除数不能为零", InfoMessageType.Error,
             VisibleIf = "@Operation == GEOperation.Divide && ModiferMagnitude == 0 && MMC == null")]
         [PropertyOrder(3)]
         public float ModiferMagnitude;
 
-        [LabelText("Operation", SdfIconType.PlusSlashMinus)]
+        [LabelText("运算法则", SdfIconType.PlusSlashMinus)]
         [LabelWidth(LABEL_WIDTH)]
         [EnumToggleButtons]
         [PropertyOrder(2)]
-        [ValidateInput("@ReflectionHelper.GetAttribute(AttributeName).IsSupportOperation($value)", "Illegal operation: The operation is not supported by this attribute.")]
+        [ValidateInput("@ReflectionHelper.GetAttribute(AttributeName).IsSupportOperation($value)", "非法运算: 该属性不支持的此运算法则")]
         public GEOperation Operation;
 
-        [LabelText("Parameter modification", SdfIconType.CpuFill)]
+        [LabelText("参数修饰", SdfIconType.CpuFill)]
         [LabelWidth(LABEL_WIDTH)]
         [AssetSelector]
-        [Tooltip("ModifierMagnitudeCalculation, modifier, responsible for the numerical calculation logic of Attribute in GAS. \nCan be empty (no modification is made to \"calculation parameters\").")]
+        [Tooltip("ModifierMagnitudeCalculation，修改器，负责GAS中Attribute的数值计算逻辑。\n可以为空(不对\"计算参数\"做任何修改)。")]
         [PropertyOrder(4)]
         public ModifierMagnitudeCalculation MMC;
 

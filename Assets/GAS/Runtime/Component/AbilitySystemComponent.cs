@@ -102,14 +102,16 @@ namespace GAS.Runtime
                 var ability = Activator.CreateInstance(info.AbilityType(), args: info) as AbstractAbility;
                 AbilityContainer.GrantAbility(ability);
             }
+#pragma warning disable CS0168 // 声明了变量，但从未使用过
             catch (MissingMethodException e)
+#pragma warning restore CS0168 // 声明了变量，但从未使用过
             {
-                // Pitfall log:
-                //    Copied the code of an AbilityAsset implementation class, but forgot to update the return value of the AbilityType() method.
-                //    Generally speaking, AbilityAsset and Ability should be matched, for example, the type of "GA_xxx" is returned in "GAA_xxx".
-                Debug.LogError($"[EX] Failed to create ability:" +
-                               $"Please check the AbilityAsset implementation class'{info.GetType().FullName}'The AbilityType() method in" +
-                               $"Whether the ability type is returned correctly (currently'{info.AbilityType()?.FullName ?? "null"}')。");
+                // 踩坑日志:
+                //   复制了某个AbilityAsset实现类的代码，但忘记更新AbilityType()方法的返回值。
+                //   一般来说AbilityAsset和Ability应该是配套的, 比如在"GAA_xxx"中返回"GA_xxx"的类型.
+                Debug.LogError($"[EX] 创建能力失败: " +
+                               $"请检查AbilityAsset实现类'{info.GetType().FullName}'中的AbilityType()方法" +
+                               $"是否正确返回了能力类型(当前为'{info.AbilityType()?.FullName ?? "null"}')。");
                 throw;
             }
         }

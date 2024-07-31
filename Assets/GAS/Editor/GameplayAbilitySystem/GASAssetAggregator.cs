@@ -142,19 +142,19 @@ namespace GAS.Editor
                         ? _directoryInfos[3]
                         : selected.Value as DirectoryInfo;
 
-                    if (SirenixEditorGUI.ToolbarButton(new GUIContent("View")))
+                    if (SirenixEditorGUI.ToolbarButton(new GUIContent("浏览")))
                     {
                         OpenDirectoryInExplorer(directoryInfo);
                     }
 
-                    if (SirenixEditorGUI.ToolbarButton(new GUIContent("Create a new subfolder")))
+                    if (SirenixEditorGUI.ToolbarButton(new GUIContent("新建子文件夹")))
                     {
                         CreateNewSubDirectory(directoryInfo);
                         GUIUtility
                             .ExitGUI(); // In order to solve: "EndLayoutGroup: BeginLayoutGroup must be called first."
                     }
 
-                    if (SirenixEditorGUI.ToolbarButton(new GUIContent("Create new asset")))
+                    if (SirenixEditorGUI.ToolbarButton(new GUIContent("新建")))
                     {
                         CreateNewAsset(directoryInfo);
                         GUIUtility
@@ -163,7 +163,7 @@ namespace GAS.Editor
 
                     if (!directoryInfo.Root)
                     {
-                        if (SirenixEditorGUI.ToolbarButton(new GUIContent("Delete")))
+                        if (SirenixEditorGUI.ToolbarButton(new GUIContent("删除")))
                         {
                             RemoveSubDirectory(directoryInfo);
                             GUIUtility
@@ -174,17 +174,17 @@ namespace GAS.Editor
 
                 if (selected is { Value: ScriptableObject asset })
                 {
-                    if (SirenixEditorGUI.ToolbarButton(new GUIContent("Locate")))
+                    if (SirenixEditorGUI.ToolbarButton(new GUIContent("定位")))
                     {
                         ShowInProject(asset);
                     }
 
-                    if (SirenixEditorGUI.ToolbarButton(new GUIContent("View")))
+                    if (SirenixEditorGUI.ToolbarButton(new GUIContent("浏览")))
                     {
                         OpenAssetInExplorer(asset);
                     }
 
-                    if (SirenixEditorGUI.ToolbarButton(new GUIContent("Locate script")))
+                    if (SirenixEditorGUI.ToolbarButton(new GUIContent("定位脚本")))
                     {
                         var monoScript = MonoScript.FromScriptableObject(asset);
                         string path = AssetDatabase.GetAssetPath(monoScript);
@@ -193,18 +193,18 @@ namespace GAS.Editor
                         ShowInProject(obj);
                     }
 
-                    if (SirenixEditorGUI.ToolbarButton(new GUIContent("Edit script")))
+                    if (SirenixEditorGUI.ToolbarButton(new GUIContent("编辑脚本")))
                     {
                         AssetDatabase.OpenAsset(MonoScript.FromScriptableObject(asset));
                     }
 
-                    if (SirenixEditorGUI.ToolbarButton(new GUIContent("Delete")))
+                    if (SirenixEditorGUI.ToolbarButton(new GUIContent("删除")))
                     {
                         RemoveAsset(asset);
                     }
                 }
 
-                if (SirenixEditorGUI.ToolbarButton(new GUIContent("GAS Settings")))
+                if (SirenixEditorGUI.ToolbarButton(new GUIContent("GAS设置")))
                 {
                     GASSettingAggregator.OpenWindow();
                 }

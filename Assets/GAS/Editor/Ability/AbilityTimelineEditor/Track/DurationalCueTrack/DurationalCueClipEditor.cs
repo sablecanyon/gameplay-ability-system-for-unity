@@ -56,7 +56,7 @@ namespace GAS.Editor
 
         private void OnDurationFrameChanged()
         {
-            // Clamp
+            // 钳制
             var max = AbilityAsset.FrameCount - _clip.DurationalCueClipData.startFrame;
             Duration = Mathf.Clamp(Duration, 1, max);
             _clip.UpdateClipDataDurationFrame(Duration);

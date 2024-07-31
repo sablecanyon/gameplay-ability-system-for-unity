@@ -44,10 +44,10 @@ namespace GAS.Editor
         public override void RefreshShow(float newFrameUnitWidth)
         {
             base.RefreshShow(newFrameUnitWidth);
-            // clip text
+            // clip 文本
             ItemLabel.text = DurationalCueClipData.cue ? DurationalCueClipData.cue.name : "NULL!";
 
-            // Refresh panel display
+            // 刷新面板显示
             if (AbilityTimelineEditorWindow.Instance.CurrentInspectorObject == this)
                 AbilityTimelineEditorWindow.Instance.SetInspector(this);
         }

@@ -90,7 +90,7 @@ namespace GAS.Editor
 
         protected override void OnAddTrackItem(DropdownMenuAction action)
         {
-            // Add Mark Data
+            // 添加Mark数据
             var markEvent = new InstantCueMarkEvent
             {
                 startFrame = GetTrackIndexByMouse(action.eventInfo.localMousePosition.x),
@@ -98,7 +98,7 @@ namespace GAS.Editor
             };
             InstantCueTrackData.markEvents.Add(markEvent);
 
-            // Refresh Display
+            // 刷新显示
             var mark = new InstantCueMark();
             mark.InitTrackMark(this, Track, _frameWidth, markEvent);
             _trackItems.Add(mark);
@@ -109,10 +109,10 @@ namespace GAS.Editor
 
         protected override void OnRemoveTrack(DropdownMenuAction action)
         {
-            // delete data
+            // 删除数据
             AbilityAsset.InstantCues.Remove(_instantCuesTrackData);
             AbilityTimelineEditorWindow.Instance.Save();
-            // Delete Display
+            // 删除显示
             TrackParent.Remove(TrackRoot);
             MenuParent.Remove(MenuRoot);
             Debug.Log("[EX] Remove Instant Cue Track");
