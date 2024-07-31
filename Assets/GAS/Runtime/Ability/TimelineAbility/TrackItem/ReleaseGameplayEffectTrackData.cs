@@ -24,7 +24,7 @@ namespace GAS.Runtime
     {
         public JsonData jsonTargetCatcher = new JsonData()
         {
-            Type = typeof(CatchSelf).FullName // 默认 CatchSelf
+            Type = typeof(CatchSelf).FullName // Default CatchSelf
         };
 
         public List<GameplayEffectAsset> gameplayEffectAssets = new List<GameplayEffectAsset>();
@@ -35,7 +35,7 @@ namespace GAS.Runtime
         {
             get
             {
-                // 如果是反序列化的数据，没有执行构造函数, 需要加载
+                // If it is deserialized data, the constructor is not executed and needs to be loaded
                 _targetCatcher ??= LoadTargetCatcher();
                 return _targetCatcher;
             }

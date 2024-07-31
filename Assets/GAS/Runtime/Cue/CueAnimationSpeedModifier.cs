@@ -19,13 +19,13 @@ namespace GAS.Runtime
         public bool includeChildrenAnimator;
 
         [TabGroup("Data", "Data")]
-        [LabelText("播放速度"), LabelWidth(LabelWidth)]
+        [LabelText("Play speed"), LabelWidth(LabelWidth)]
         [Range(0, 5f)]
         public float speed = 1f;
 
         [TabGroup("Data", "Data")]
-        [InfoBox("结束时会设置的值, 如果有其它需求, 需要另外实现. ^_^", InfoMessageType.None)]
-        [LabelText("默认播放速度"), LabelWidth(LabelWidth)]
+        [InfoBox("The value that will be set at the end. If there are other requirements, they need to be implemented separately. ^_^", InfoMessageType.None)]
+        [LabelText("Default playback speed"), LabelWidth(LabelWidth)]
         [Range(0, 5f)]
         public float defaultSpeed = 1f;
 

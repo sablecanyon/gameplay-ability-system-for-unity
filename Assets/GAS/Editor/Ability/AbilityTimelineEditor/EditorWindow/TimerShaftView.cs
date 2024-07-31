@@ -209,7 +209,7 @@ namespace GAS.Editor
                     Mathf.RoundToInt(AbilityTimelineEditorConfig.MaxFrameUnitLevel *
                                      AbilityTimelineEditorConfig.StandardFrameUnitWidth));
 
-            // 以鼠标为缩放中心
+            // Zoom with mouse as center
             // var mousePos = evt.localMousePosition.x;
             // var mouseFrame = GetFrameIndexByMouse(mousePos);
             // var mouseFramePos = mouseFrame * Config.FrameUnitWidth;

@@ -24,7 +24,7 @@ namespace GAS.Runtime
         public string Description;
 
         [TabGroup("Base/H1/V2", "General", SdfIconType.AwardFill, TextColor = "#FF7F00", Order = 2)]
-        [LabelText("所属能力", SdfIconType.FileCodeFill)]
+        [LabelText("Ability", SdfIconType.FileCodeFill)]
         [LabelWidth(WIDTH_LABEL)]
         [ShowInInspector]
         [InfoBox("Ability Class is NULL!!! Please check.", InfoMessageType.Error, VisibleIf = "@AbilityType() == null")]
@@ -34,14 +34,14 @@ namespace GAS.Runtime
 #if UNITY_EDITOR
         [TabGroup("Base/H1/V2", "General")]
         [TabGroup("Base/H1/V2", "Detail", SdfIconType.TicketDetailedFill, TextColor = "#BC2FDE")]
-        [LabelText("类型名称", SdfIconType.FileCodeFill)]
+        [LabelText("Type Name", SdfIconType.FileCodeFill)]
         [LabelWidth(WIDTH_LABEL)]
         [ShowInInspector]
         [PropertyOrder(-1)]
         public string TypeName => GetType().Name;
 
         [TabGroup("Base/H1/V2", "Detail")]
-        [LabelText("类型全名", SdfIconType.FileCodeFill)]
+        [LabelText("Type Full Name", SdfIconType.FileCodeFill)]
         [LabelWidth(WIDTH_LABEL)]
         [ShowInInspector]
         [PropertyOrder(-1)]
@@ -50,7 +50,7 @@ namespace GAS.Runtime
         [TabGroup("Base/H1/V2", "Detail")]
         [ListDrawerSettings(ShowFoldout = true, ShowItemCount = false, ShowPaging = false)]
         [ShowInInspector]
-        [LabelText("继承关系")]
+        [LabelText("Inheritance")]
         [LabelWidth(WIDTH_LABEL)]
         [PropertyOrder(-1)]
         public string[] InheritanceChain => GetType().GetInheritanceChain().Reverse().ToArray();
@@ -60,13 +60,13 @@ namespace GAS.Runtime
         [InfoBox(GASTextDefine.TIP_UNAME, InfoMessageType.None)]
         [LabelText("U-Name", SdfIconType.Fingerprint)]
         [LabelWidth(WIDTH_LABEL)]
-        [InfoBox("无效的名字 - 不符合C#标识符命名规则", InfoMessageType.Error,
+        [InfoBox("Invalid name - does not conform to C# identifier naming rules", InfoMessageType.Error,
             "@GAS.General.Validation.Validations.IsValidVariableName($value) == false")]
         [InlineButton("@UniqueName = name", "Auto", Icon = SdfIconType.Hammer)]
         public string UniqueName;
 
         [TabGroup("Base/H1/V2", "General")]
-        [Title("消耗&冷却", bold: true)]
+        [Title("Cost & Cooldown", bold: true)]
         [LabelWidth(WIDTH_LABEL)]
         [AssetSelector]
         [LabelText(SdfIconType.HeartHalf, Text = GASTextDefine.ABILITY_EFFECT_COST)]
@@ -88,7 +88,7 @@ namespace GAS.Runtime
         [TabGroup("Base/H1/V3", "Tags", SdfIconType.TagsFill, TextColor = "#45B1FF", Order = 3)]
         [ListDrawerSettings(ShowFoldout = true, ShowItemCount = false)]
         [ValueDropdown("@ValueDropdownHelper.GameplayTagChoices", IsUniqueList = true, HideChildProperties = true)]
-        [Tooltip("描述性质的标签，用来描述Ability的特性表现，比如伤害、治疗、控制等。")]
+        [Tooltip("Tags describing properties are used to describe the characteristics of Ability, such as damage, treatment, control, etc.")]
         [FormerlySerializedAs("AssetTag")]
         public GameplayTag[] AssetTags;
 
@@ -97,7 +97,7 @@ namespace GAS.Runtime
         [ValueDropdown("@ValueDropdownHelper.GameplayTagChoices", IsUniqueList = true, HideChildProperties = true)]
         [LabelText("CancelAbility With Tags ")]
         [Space]
-        [Tooltip("Ability激活时，Ability持有者当前持有的所有Ability中，拥有【任意】这些标签的Ability会被取消。")]
+        [Tooltip("When an ability is activated, all abilities currently held by the ability holder that have the [Any] tag will be canceled.")]
         public GameplayTag[] CancelAbilityTags;
 
         [TabGroup("Base/H1/V3", "Tags")]
@@ -105,14 +105,14 @@ namespace GAS.Runtime
         [ValueDropdown("@ValueDropdownHelper.GameplayTagChoices", IsUniqueList = true, HideChildProperties = true)]
         [LabelText("BlockAbility With Tags ")]
         [Space]
-        [Tooltip("Ability激活时，Ability持有者当前持有的所有Ability中，拥有【任意】这些标签的Ability会被阻塞激活。")]
+        [Tooltip("When an ability is activated, all abilities currently held by the ability holder, those with the tags [Any] will be blocked from activation.")]
         public GameplayTag[] BlockAbilityTags;
 
         [TabGroup("Base/H1/V3", "Tags")]
         [ListDrawerSettings(ShowFoldout = true, ShowItemCount = false)]
         [ValueDropdown("@ValueDropdownHelper.GameplayTagChoices", IsUniqueList = true, HideChildProperties = true)]
         [Space]
-        [Tooltip("Ability激活时，持有者会获得这些标签，Ability被失活时，这些标签也会被移除。")]
+        [Tooltip("When the ability is activated, the holder will gain these tags, and when the ability is deactivated, these tags will be removed.")]
         [FormerlySerializedAs("ActivationOwnedTag")]
         public GameplayTag[] ActivationOwnedTags;
 
@@ -120,14 +120,14 @@ namespace GAS.Runtime
         [ListDrawerSettings(ShowFoldout = true, ShowItemCount = false)]
         [ValueDropdown("@ValueDropdownHelper.GameplayTagChoices", IsUniqueList = true, HideChildProperties = true)]
         [Space]
-        [Tooltip("Ability只有在其拥有者拥有【所有】这些标签时才可激活。")]
+        [Tooltip("An Ability can only be activated if its owner has [all] of these tags.")]
         public GameplayTag[] ActivationRequiredTags;
 
         [TabGroup("Base/H1/V3", "Tags")]
         [ListDrawerSettings(ShowFoldout = true, ShowItemCount = false)]
         [ValueDropdown("@ValueDropdownHelper.GameplayTagChoices", IsUniqueList = true, HideChildProperties = true)]
         [Space]
-        [Tooltip("Ability在其拥有者拥有【任意】这些标签时不能被激活。")]
+        [Tooltip("An ability cannot be activated if its owner has [any] of these tags.")]
         public GameplayTag[] ActivationBlockedTags;
         // public GameplayTag[] SourceRequiredTags;
         // public GameplayTag[] SourceBlockedTags;

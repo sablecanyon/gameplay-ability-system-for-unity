@@ -4,13 +4,13 @@ namespace GAS.Runtime
 {
     public enum CalculateMode
     {
-        [LabelText(SdfIconType.Stack, Text = "叠加计算")]
+        [LabelText(SdfIconType.Stack, Text = "Superposition calculation")]
         Stacking,
 
-        [LabelText(SdfIconType.GraphDownArrow, Text = "取最小值")]
+        [LabelText(SdfIconType.GraphDownArrow, Text = "Take the minimum value")]
         MinValueOnly,
 
-        [LabelText(SdfIconType.GraphUpArrow, Text = "取最大值")]
+        [LabelText(SdfIconType.GraphUpArrow, Text = "Take the maximum value")]
         MaxValueOnly,
     }
 

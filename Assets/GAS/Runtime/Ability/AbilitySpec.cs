@@ -7,20 +7,20 @@ namespace GAS.Runtime
         protected object[] _abilityArguments = Array.Empty<object>();
 
         /// <summary>
-        /// 获取激活能力时传递给能力的参数。
+        /// Gets the parameters passed to the ability when activating it.
         /// </summary>
         /// <remarks>
-        /// <para>该属性返回一个对象数组，表示激活能力时传入的参数。</para>
-        /// <para>即使没有参数传递，该数组也绝不会是 <c>null</c>，在这种情况下，它将是一个空数组。</para>
+        /// <para>This property returns an array of objects representing the parameters passed in when activating the ability.</para>
+        /// <para>Even if no arguments are passed, the array will never be <c>null</c>, in which case it will be an empty array.</para>
         /// </remarks>
         public object[] AbilityArguments => _abilityArguments;
 
         /// <summary>
-        /// 获取或设置与能力关联的自定义数据。
+        /// Gets or sets custom data associated with a ability.
         /// </summary>
         /// <remarks>
-        /// <para>此属性用于存储能力的自定义信息，以便在能力的不同任务之间共享数据。</para>
-        /// <para>例如，可以在一个技能的任务(AbilityTask)中设置此数据，然后在同一个技能的另一个任务(AbilityTask)中检索和使用该数据。</para>
+        /// <para>This property is used to store custom information for an ability so that data can be shared between different tasks of the ability.</para>
+        /// <para>For example, you can set this data in one AbilityTask, and then retrieve and use it in another AbilityTask of the same skill.</para>
         /// </remarks>
         public object UserData { get; set; }
 
@@ -126,7 +126,7 @@ namespace GAS.Runtime
 
             foreach (var modifier in Ability.Cost.Modifiers)
             {
-                // 常规来说消耗是减法, 但是加一个负数也应该被视为减法
+                // Generally speaking, consumption is subtraction, but adding a negative number should also be considered subtraction.
                 if (modifier.Operation != GEOperation.Add && modifier.Operation != GEOperation.Minus) continue;
 
                 var costValue = modifier.CalculateMagnitude(costSpec, modifier.ModiferMagnitude);
@@ -176,7 +176,7 @@ namespace GAS.Runtime
             if (success)
             {
                 IsActive = true;
-                ActiveCount++;
+                ActiveCount++;//todo when does this value drop? or maybe its purpose is to count how many times the ability has been activated?
                 Owner.GameplayTagAggregator.ApplyGameplayAbilityDynamicTag(this);
 
                 ActivateAbility(_abilityArguments);

@@ -60,7 +60,7 @@ namespace GAS.Editor
         
         protected override void OnAddTrackItem(DropdownMenuAction action)
         {
-            // 添加Clip数据
+            // Add Clip Data
             var clipEvent = new TaskClipEvent
             {
                 startFrame = GetTrackIndexByMouse(action.eventInfo.localMousePosition.x),
@@ -69,12 +69,12 @@ namespace GAS.Editor
             };
             TaskClipTrackDataForSave.clipEvents.Add(clipEvent);
             
-            // 刷新显示
+            // Refresh Display
             var item = new TaskClip();
             item.InitTrackClip(this, Track, _frameWidth, clipEvent);
             _trackItems.Add(item);
             
-            // 选中新Clip
+            // Select the new Clip
             item.ClipVe.OnSelect();
             
             Debug.Log("[EX] Add a new Custom Clip Event");
@@ -82,10 +82,10 @@ namespace GAS.Editor
 
         protected override void OnRemoveTrack(DropdownMenuAction action)
         {
-            // 删除数据
+            // delete data
             AbilityAsset.OngoingTasks.Remove(_taskClipEventTrackData);
             AbilityTimelineEditorWindow.Instance.Save();
-            // 删除显示
+            // Delete Display
             TrackParent.Remove(TrackRoot);
             MenuParent.Remove(MenuRoot);
             Debug.Log("[EX] Remove Task Clip Track");

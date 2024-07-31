@@ -79,9 +79,9 @@ namespace GAS.Editor
     {
         internal string filepath;
         /// <summary>
-        /// 单例存放路径
+        /// Singleton storage path
         /// </summary>
-        /// <param name="path">相对 Project 路径</param>
+        /// <param name="path">Relative Project Path</param>
         public FilePathAttribute(string path)
         {
             if (string.IsNullOrEmpty(path))

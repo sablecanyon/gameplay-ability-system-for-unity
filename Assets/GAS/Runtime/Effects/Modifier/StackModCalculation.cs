@@ -6,13 +6,13 @@ namespace GAS.Runtime
     [CreateAssetMenu( fileName = "StackModCalculation", menuName = "GAS/MMC/StackModCalculation" )]
     public class StackModCalculation:ModifierMagnitudeCalculation
     {
-        [InfoBox("计算逻辑与ScalableFloatModCalculation一致, 公式：(StackCount) * k + b")]
+        [InfoBox("The calculation logic is the same as ScalableFloatModCalculation, formula: (StackCount) * k + b")]
         [TabGroup("Default", "StackModCalculation")]
-        [LabelText("系数(k)")]
+        [LabelText("Coefficient (k)")]
         public float k = 1;
 
         [TabGroup("Default", "StackModCalculation")]
-        [LabelText("常量(b)")]
+        [LabelText("Constant (b)")]
         public float b = 0;
         
         public override float CalculateMagnitude(GameplayEffectSpec spec, float modifierMagnitude)

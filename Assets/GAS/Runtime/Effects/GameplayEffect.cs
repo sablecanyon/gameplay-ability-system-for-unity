@@ -5,13 +5,13 @@ namespace GAS.Runtime
 {
     public enum EffectsDurationPolicy
     {
-        [LabelText("瞬时(Instant)", SdfIconType.LightningCharge)]
+        [LabelText("Instant", SdfIconType.LightningCharge)]
         Instant = 1,
 
-        [LabelText("永久(Infinite)", SdfIconType.Infinity)]
+        [LabelText("Infinite", SdfIconType.Infinity)]
         Infinite,
 
-        [LabelText("限时(Duration)", SdfIconType.HourglassSplit)]
+        [LabelText("Duration", SdfIconType.HourglassSplit)]
         Duration
     }
 
@@ -57,7 +57,7 @@ namespace GAS.Runtime
         }
 
         /// <summary>
-        /// 分离GameplayEffectSpec的实例化过程为：实例 + 数据初始化
+        /// The instantiation process of separating GameplayEffectSpec is: instance + data initialization
         /// </summary>
         /// <returns></returns>
         public GameplayEffectSpec CreateSpec()

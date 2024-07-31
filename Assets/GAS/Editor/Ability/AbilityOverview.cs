@@ -93,7 +93,7 @@ namespace GAS.Editor
             {
                 var text = Validations.ValidateVariableName(ability.UniqueName).IsValid
                     ? ability.UniqueName
-                    : $"{ability.UniqueName}(非法UniqueName)";
+                    : $"{ability.UniqueName}(Illegal UniqueName)";
 
                 if (_showDetail)
                 {

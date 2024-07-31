@@ -4,7 +4,7 @@ using UnityEngine;
 namespace GAS.Runtime
 {
     /// <summary>
-    ///  基于属性混合GE堆栈的MMC
+    ///  MMC based on attribute hybrid GE stack
     /// </summary>
     [CreateAssetMenu(fileName = "AttrBasedWithStackModCalculation", menuName = "GAS/MMC/AttrBasedWithStackModCalculation")]
     public class AttrBasedWithStackModCalculation:AttributeBasedModCalculation
@@ -15,26 +15,26 @@ namespace GAS.Runtime
             Multiply
         }
         
-        [InfoBox(" 公式：StackCount * sK + sB")]
+        [InfoBox(" Formula: StackCount * sK + sB")]
         [TabGroup("Default", "AttributeBasedModCalculation")]
-        [Title("堆叠幅值计算")]
-        [LabelText("系数(sK)")]
+        [Title("Stack Magnitude Calculation")]
+        [LabelText("Coefficient (sK)")]
         public float sK = 1;
 
         [TabGroup("Default", "AttributeBasedModCalculation")]
-        [LabelText("常量(sB)")]
+        [LabelText("Constant (sB)")]
         public float sB = 0;
 
         [TabGroup("Default", "AttributeBasedModCalculation")]
-        [Title("最终结果")]
-        [InfoBox(" 最终公式： \n" +
+        [Title("Final result")]
+        [InfoBox(" Final formula: \n" +
                  "Add:(AttributeValue * k + b)+(StackCount * sK + sB); \n" +
                  "Multiply:(AttributeValue * k + b)*(StackCount * sK + sB)")]
-        [LabelText("Stack幅值与Attr幅值计算方式")]
+        [LabelText("Stack Magnitude and Attr Magnitude calculation method")]
         public StackMagnitudeOperation stackMagnitudeOperation;
 
         [TabGroup("Default", "AttributeBasedModCalculation")]
-        [LabelText("最终公式")]
+        [LabelText("Final formula")]
         [ShowInInspector]
         [DisplayAsString(TextAlignment.Left, true)]
         public string FinalFormulae

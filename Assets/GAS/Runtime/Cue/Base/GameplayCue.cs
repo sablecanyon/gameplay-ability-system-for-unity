@@ -19,14 +19,14 @@ namespace GAS.Runtime
 #if UNITY_EDITOR
         [TabGroup("Base/H1/V2", "General", SdfIconType.AwardFill, TextColor = "#FF7F00", Order = 2)]
         [TabGroup("Base/H1/V2", "Detail", SdfIconType.TicketDetailedFill, TextColor = "#BC2FDE")]
-        [LabelText("类型名称", SdfIconType.FileCodeFill)]
+        [LabelText("Type Name", SdfIconType.FileCodeFill)]
         [LabelWidth(WIDTH_LABEL)]
         [ShowInInspector]
         [PropertyOrder(-1)]
         public string TypeName => GetType().Name;
 
         [TabGroup("Base/H1/V2", "Detail")]
-        [LabelText("类型全名", SdfIconType.FileCodeFill)]
+        [LabelText("Type Full Name", SdfIconType.FileCodeFill)]
         [LabelWidth(WIDTH_LABEL)]
         [ShowInInspector]
         [PropertyOrder(-1)]
@@ -35,7 +35,7 @@ namespace GAS.Runtime
         [TabGroup("Base/H1/V2", "Detail")]
         [ListDrawerSettings(ShowFoldout = true, ShowItemCount = false, ShowPaging = false)]
         [ShowInInspector]
-        [LabelText("继承关系")]
+        [LabelText("Inheritance")]
         [LabelWidth(WIDTH_LABEL)]
         [PropertyOrder(-1)]
         public string[] InheritanceChain => GetType().GetInheritanceChain().Reverse().ToArray();
@@ -44,23 +44,23 @@ namespace GAS.Runtime
         [TabGroup("Base/H1/V3", "Tags", SdfIconType.TagsFill, TextColor = "#45B1FF", Order = 3)]
         [ListDrawerSettings(ShowFoldout = true, ShowItemCount = false)]
         [ValueDropdown("@ValueDropdownHelper.GameplayTagChoices", IsUniqueList = true, HideChildProperties = true)]
-        [LabelText("RequiredTags - 持有所有标签才可触发")]
+        [LabelText("RequiredTags - All tags are required to trigger")]
         public GameplayTag[] RequiredTags;
 
         [TabGroup("Base/H1/V3", "Tags")]
         [ListDrawerSettings(ShowFoldout = true, ShowItemCount = false)]
         [ValueDropdown("@ValueDropdownHelper.GameplayTagChoices", IsUniqueList = true, HideChildProperties = true)]
-        [LabelText("ImmunityTags - 持有任意标签不可触发")]
+        [LabelText("ImmunityTags - Cannot be triggered if any tag is present")]
         public GameplayTag[] ImmunityTags;
 
         public virtual bool Triggerable(AbilitySystemComponent owner)
         {
             if (owner == null) return false;
-            // 持有【所有】RequiredTags才可触发
+            // Only when [all] RequiredTags are held can it be triggered
             if (!owner.HasAllTags(new GameplayTagSet(RequiredTags)))
                 return false;
 
-            // 持有【任意】ImmunityTags不可触发
+            // Holding [Any] ImmunityTags cannot be triggered
             if (owner.HasAnyTags(new GameplayTagSet(ImmunityTags)))
                 return false;
 

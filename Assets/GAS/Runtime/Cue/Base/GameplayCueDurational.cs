@@ -39,6 +39,7 @@ namespace GAS.Runtime
         public abstract void OnGameplayEffectActivate();
         public abstract void OnGameplayEffectDeactivate();
         public abstract void OnTick();
+        public virtual void OnTickUpdate(){} // todo my code ticks every frame not abstract yet
     }
 
     public abstract class GameplayCueDurationalSpec<T> : GameplayCueDurationalSpec where T : GameplayCueDurational

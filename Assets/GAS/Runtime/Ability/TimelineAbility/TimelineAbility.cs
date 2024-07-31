@@ -14,7 +14,7 @@ namespace GAS.Runtime
         protected TimelineAbilityPlayer<T> _player;
 
         /// <summary>
-        /// 向性技能的作用目标
+        /// The target of the directional skills
         /// </summary>
         public AbilitySystemComponent Target { get; private set; }
 
@@ -52,7 +52,7 @@ namespace GAS.Runtime
     }
 
     /// <summary>
-    /// 这是一个最朴素的TimelineAbility实现, 如果要实现更复杂的TimelineAbility, 请用TimelineAbilityT<T>和TimelineAbilitySpecT<T>为基类
+    /// This is the simplest TimelineAbility implementation. If you want to implement a more complex TimelineAbility, please use TimelineAbilityT<T> and TimelineAbilitySpecT<T> as the base class.
     /// </summary>
     public sealed class TimelineAbility : TimelineAbilityT<TimelineAbilityAssetBase>
     {
@@ -67,7 +67,7 @@ namespace GAS.Runtime
     }
 
     /// <summary>
-    /// 这是一个最朴素的TimelineAbilitySpec实现, 如果要实现更复杂的TimelineAbility, 请用TimelineAbilityT<T>和TimelineAbilitySpecT<T>为基类
+    /// This is a simple TimelineAbilitySpec implementation. If you want to implement a more complex TimelineAbility, please use TimelineAbilityT<T> and TimelineAbilitySpecT<T> as the base class.
     /// </summary>
     public sealed class TimelineAbilitySpec : TimelineAbilitySpecT<TimelineAbility>
     {
